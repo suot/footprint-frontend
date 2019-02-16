@@ -1,28 +1,42 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Loadable from 'react-loadable';
+import './App.scss';
+import Notfound from './components/page/notfound'
+
+const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
+
+// Containers
+const DefaultLayout = Loadable({
+    loader: () => import('./components/defaultLayout/DefaultLayout'),
+    loading
+});
+
+// // Pages
+// const Login = Loadable({
+//     loader: () => import('./views/Pages/Login'),
+//     loading
+// });
+//
+// const Register = Loadable({
+//     loader: () => import('./views/Pages/Register'),
+//     loading
+// });
+
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <BrowserRouter>
+                <Switch>
+                    {/*<Route exact path="/login" name="Login Page" component={Login} />*/}
+                    {/*<Route exact path="/register" name="Register Page" component={Register} />*/}
+                    <Route path="/" name="Home" component={DefaultLayout} />
+                    <Route component={Notfound} />
+                </Switch>
+            </BrowserRouter>
+        );
+    }
 }
 
 export default App;
