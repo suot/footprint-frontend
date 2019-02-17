@@ -10,13 +10,14 @@
     "font-awesome": "^4.7.0",
     "node-sass": "^4.11.0",
     "react": "^16.8.2",
+    "react-avatar-editor": "^11.0.6",
     "react-bootstrap": "^1.0.0-beta.5",
     "react-dom": "^16.8.2",
     "react-loadable": "^5.5.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.5",
-    "simple-line-icons": "^2.4.1",
-    "reactstrap": "latest"
+    "reactstrap": "latest",
+    "simple-line-icons": "^2.4.1"
   },
   "scripts": {
     "start": "react-scripts start",

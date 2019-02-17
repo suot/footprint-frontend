@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
 import './App.scss';
-import Notfound from './components/page/notfound'
+import Notfound from './components/pages/Notfound'
 
 const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
 
@@ -12,16 +12,16 @@ const DefaultLayout = Loadable({
     loading
 });
 
-// // Pages
-// const Login = Loadable({
-//     loader: () => import('./views/Pages/Login'),
-//     loading
-// });
-//
-// const Register = Loadable({
-//     loader: () => import('./views/Pages/Register'),
-//     loading
-// });
+// Pages
+const Login = Loadable({
+    loader: () => import('./components/pages/Login'),
+    loading
+});
+
+const Register = Loadable({
+    loader: () => import('./components/pages/Register'),
+    loading
+});
 
 
 class App extends Component {
@@ -29,8 +29,8 @@ class App extends Component {
         return (
             <BrowserRouter>
                 <Switch>
-                    {/*<Route exact path="/login" name="Login Page" component={Login} />*/}
-                    {/*<Route exact path="/register" name="Register Page" component={Register} />*/}
+                    <Route exact path="/login" name="Login Page" component={Login} />
+                    <Route exact path="/register" name="Register Page" component={Register} />
                     <Route path="/" name="Home" component={DefaultLayout} />
                     <Route component={Notfound} />
                 </Switch>

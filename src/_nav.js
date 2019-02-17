@@ -19,12 +19,12 @@ export default {
     //   class: ''             // optional class names space delimited list for title item ex: "text-center"
     // },
     {
-      name: 'My Footprints',
+      name: 'My footprints',
       url: '/footprints/me',
       icon: 'icon-drop',
     },
     {
-      name: 'Friends\'s Footprints',
+      name: 'Friends\' footprints',
       url: '/footprints/friends',
       icon: 'icon-pencil',
     },

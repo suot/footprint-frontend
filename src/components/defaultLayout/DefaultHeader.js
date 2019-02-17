@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Badge, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, NavLink } from 'reactstrap';
+import {Badge, Button, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, NavLink} from 'reactstrap';
 import { AppHeaderDropdown, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
 
 import logo from '../../assets/img/logo.svg'
 import miniLogo from '../../assets/img/miniLogo.svg'
+import {Link} from "react-router-dom";
 
 
 class DefaultHeader extends Component {
@@ -29,10 +30,15 @@ class DefaultHeader extends Component {
             </DropdownToggle>
             <DropdownMenu right style={{ right: 'auto' }}>
               <DropdownItem header tag="div" className="text-center"><strong>Profile</strong></DropdownItem>
-              <DropdownItem><i className="fa fa-bell-o"></i> Show Profile<Badge color="info">42</Badge></DropdownItem>
-              <DropdownItem><i className="fa fa-envelope-o"></i> Change Profile<Badge color="success">42</Badge></DropdownItem>
+
+              <DropdownItem>
+                  <Link to="/profile">
+                      <i className="fa fa-bell-o"></i> Profile<Badge color="info">42</Badge>
+                  </Link>
+              </DropdownItem>
+
+              <DropdownItem><i className="fa fa-envelope-o"></i> Change Password</DropdownItem>
               <DropdownItem header tag="div" className="text-center"><strong>Settings</strong></DropdownItem>
-              <DropdownItem><i className="fa fa-user"></i> Change Password</DropdownItem>
               <DropdownItem onClick={e => this.props.onLogout(e)}><i className="fa fa-lock"></i> Logout</DropdownItem>
             </DropdownMenu>
           </AppHeaderDropdown>
