@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import {Badge, Button, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, NavLink} from 'reactstrap';
 import { AppHeaderDropdown, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
 
-import logo from '../../assets/img/logo.svg'
-import miniLogo from '../../assets/img/miniLogo.svg'
+import logo from '../../assets/img/footprint.png'
+import miniLogo from '../../assets/img/footprint_mini.png'
 import {Link} from "react-router-dom";
 
 
