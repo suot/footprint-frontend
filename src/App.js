@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
 import './App.scss';
-import Notfound from './components/pages/Notfound'
+import Notfound from './components/auth/Notfound'
 
 const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
 
@@ -14,12 +14,12 @@ const DefaultLayout = Loadable({
 
 // Pages
 const Login = Loadable({
-    loader: () => import('./components/pages/Login'),
+    loader: () => import('./components/auth/Login'),
     loading
 });
 
 const Register = Loadable({
-    loader: () => import('./components/pages/Register'),
+    loader: () => import('./components/auth/Register'),
     loading
 });
 

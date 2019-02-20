@@ -59,6 +59,8 @@ class MyAvatarEditor extends React.Component {
                 editorHidden: true,
                 imageURL: dataURL,
             });
+
+            this.props.transmitAvatar(dataURL);
         }
     }
     setEditorRef = (editor) => this.editor = editor

@@ -1,26 +1,13 @@
 import React, { Component } from 'react';
 import {
-  Badge,
   Button,
-  ButtonDropdown,
   Card,
   CardBody,
   CardFooter,
   CardHeader,
   Col,
-  Collapse,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle,
-  Fade,
-  Form,
   FormGroup,
-  FormText,
-  FormFeedback,
   Input,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
   Label,
   Row,
 } from 'reactstrap';
@@ -51,8 +38,17 @@ class Profile extends Component {
   }
 
 
-  submitProfile = () => {
+  transmitAvatar = (dataURL) => {
+      this.setState({
+          ...this.state,
+          profile: {
+              avatar: dataURL,
+          }
+      });
+  }
 
+  submitProfile = () => {
+    console.log(this.state.profile);
   }
 
 
@@ -68,20 +64,14 @@ class Profile extends Component {
               <CardBody>
                 <FormGroup row className="my-0">
                   <Col xs="2">
-                    <MyAvatarEditor />
+                    <MyAvatarEditor transmitAvatar={this.transmitAvatar}/>
                   </Col>
                   <Col xs="10">
                     <FormGroup row className="my-0">
-                      <Col xs="6">
-                        <FormGroup>
-                          <Label htmlFor="username">Username</Label>
-                          <Input type="text" id="username" disabled/>
-                        </FormGroup>
-                      </Col>
-                      <Col xs="6">
+                      <Col xs="12">
                         <FormGroup>
                           <Label htmlFor="email">Email</Label>
-                          <Input type="text" id="email" placeholder="Enter your email" />
+                          <Input type="text" id="email" disabled/>
                         </FormGroup>
                       </Col>
                     </FormGroup>
