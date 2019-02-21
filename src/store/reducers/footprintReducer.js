@@ -41,7 +41,18 @@ const initState = {
 }
 
 const footprintReducer = (state = initState, action) => {
-    return state;
+    switch (action.type) {
+        case 'ADD_FOOTPRINT':{
+            console.log('add footprint', action.footprint);
+            return state;
+        }
+        case 'ADD_FOOTPRINT_ERROR':{
+            console.log('add footprint error', action.err);
+            return state;
+        }
+        default:
+            return state;
+    }
 }
 
 export default footprintReducer

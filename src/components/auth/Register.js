@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Button, Card, CardBody, CardFooter, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
-import Firebase from './Firebase';
 
 
 class Register extends Component {
@@ -23,15 +22,6 @@ class Register extends Component {
 
   addUser = e => {
     e.preventDefault();
-
-    const db = Firebase();
-    db.settings({
-      timestampsInSnapshots: true
-    });
-    const userRef = db.collection("users").add({
-      email: this.state.email,
-      password: this.state.password
-    });
 
     this.setState({
       fullname: "",

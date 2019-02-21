@@ -1,4 +1,6 @@
-import app from 'firebase/app';
+import firebase from 'firebase/app';
+import 'firebase/firestore'
+import 'firebase/auth'
 
 
 // Initialize Firebase
@@ -11,12 +13,10 @@ var config = {
     messagingSenderId: "568360049395"
 };
 
-class Firebase {
-    constructor() {
-        app.initializeApp(config);
-    }
-}
 
-export default Firebase;
+firebase.initializeApp(config);
+firebase.firestore().settings({ timestampsInSnapshots: true });
+
+export default firebase;
 
 
