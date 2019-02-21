@@ -19,7 +19,8 @@ class Dashboard extends Component {
 const mapStateToProps = (state) => {
     console.log(state);
     return {
-        footprints: state.footprint.footprints
+        //footprints: state.footprint.footprints
+        footprints: state.firestore.ordered.footprints
     }
 }
 

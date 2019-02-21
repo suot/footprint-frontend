@@ -1,6 +1,9 @@
 import React from 'react'
 import { Button, Card, CardBody, CardFooter, CardHeader, Col, Row } from 'reactstrap';
 import FootprintDetails from './FootprintDetails'
+import FootprintSummary from './FootprintSummary'
+import { Link } from 'react-router-dom'
+
 
 const FootprintList = ({footprints}) => {
     // addFootprint = () => {
@@ -19,7 +22,9 @@ const FootprintList = ({footprints}) => {
                             {
                                 footprints && footprints.map(footprint => {
                                     return(
-                                        <FootprintDetails footprint={footprint} key={footprint.id} />
+                                        <Link to={"/footprint/"+footprint.id} key={footprint.id}>
+                                            <FootprintSummary footprint={footprint} />
+                                        </Link>
                                     )
                                 })
                             }
