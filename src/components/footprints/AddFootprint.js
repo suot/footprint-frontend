@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Card, CardBody, CardFooter, CardHeader, Col, FormGroup, Form, Input, Label, Row } from 'reactstrap';
-import { addFootprint } from '../../store/actions/footprintActions'
 import { connect } from 'react-redux'
-
-
-import { reduxFirestore, getFirestore } from 'redux-firestore'
-import { reactReduxFirebase, getFirebase } from 'react-redux-firebase'
+import { getFirestore } from 'redux-firestore'
 
 
 class AddFootprint extends Component {
@@ -74,6 +70,7 @@ class AddFootprint extends Component {
                                                     <option value="Busan">Busan</option>
                                                     <option value="Lahore">Lahore</option>
                                                     <option value="Seoul">Seoul</option>
+                                                    <option value="Kyoto">Toronto</option>
                                                     <option value="Kyoto">Kyoto</option>
                                                 </Input>
                                             </FormGroup>
@@ -125,8 +122,8 @@ class AddFootprint extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // addFootprint: (footprint) => dispatch(addFootprint(footprint))
-        // addFootprint: (footprint) => dispatch({ type: 'ADD_FOOTPRINT', footprint})
+        //addFootprint: (footprint) => dispatch(addFootprint(footprint))
+       
         addFootprint: (footprint) => {
             const firestore = getFirestore();
             firestore.collection('footprints').add({
@@ -138,6 +135,8 @@ const mapDispatchToProps = (dispatch) => {
                 dispatch({ type: 'ADD_FOOTPRINT_ERROR', err })
             })
         }
+        
+        
     }
 }
 

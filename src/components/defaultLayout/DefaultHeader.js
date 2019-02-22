@@ -4,7 +4,7 @@ import { AppHeaderDropdown, AppNavbarBrand, AppSidebarToggler } from '@coreui/re
 
 import logo from '../../assets/img/footprint.png'
 import miniLogo from '../../assets/img/footprint_mini.png'
-import {Link} from "react-router-dom";
+// import {Link} from "react-router-dom";
 
 
 class DefaultHeader extends Component {

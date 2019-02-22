@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Card, CardBody, CardFooter, CardHeader, Col, Row } from 'reactstrap';
-import FootprintDetails from './FootprintDetails'
+// import FootprintDetails from './FootprintDetails'
 import FootprintSummary from './FootprintSummary'
 import { Link } from 'react-router-dom'
 

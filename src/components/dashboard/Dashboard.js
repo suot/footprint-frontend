@@ -30,3 +30,6 @@ export default compose(
         { collection: 'footprints' }
     ])
 )(Dashboard)
+
+
+

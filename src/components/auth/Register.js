@@ -16,7 +16,7 @@ class Register extends Component {
 
   updateInput = e => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.id]: e.target.value
     });
   }
 
