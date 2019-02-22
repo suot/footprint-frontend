@@ -8,8 +8,6 @@ class Dashboard extends Component {
     render(){
         return(
             <div className="dashboard container">
-                {/*<h1>Dashboard</h1>*/}
-                {/*<Notifications />*/}
                 <FootprintList footprints={this.props.footprints} />
             </div>
         )
@@ -17,9 +15,7 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
-        //footprints: state.footprint.footprints
         footprints: state.firestore.ordered.footprints
     }
 }

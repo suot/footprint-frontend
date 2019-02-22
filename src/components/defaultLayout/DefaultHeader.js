@@ -3,16 +3,15 @@ import {Badge, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, NavLink
 import { AppHeaderDropdown, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
 import logo from '../../assets/img/footprint.png'
 import miniLogo from '../../assets/img/footprint_mini.png'
-// import {Link} from "react-router-dom";
-import { signOut } from '../../store/actions/authActions'
-
 import { connect } from 'react-redux'
 import firebase from 'firebase/app';
+import { signOut } from '../../store/actions/authActions'
 
 
 class DefaultHeader extends Component {
 
-  render() {
+
+  render() {    
     return (
       <React.Fragment>
         <AppSidebarToggler className="d-lg-none" display="md" mobile />
@@ -63,6 +62,7 @@ class DefaultHeader extends Component {
 
 DefaultHeader.propTypes = {};
 DefaultHeader.defaultProps = {};
+
 
 
 const mapDispatchToProps = (dispatch) => {

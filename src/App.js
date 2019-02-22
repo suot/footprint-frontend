@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
 import './App.scss';
-import Notfound from './components/auth/Notfound'
+// import Notfound from './components/auth/Notfound'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
 
 const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
@@ -28,25 +29,36 @@ const Register = Loadable({
 
 class App extends Component {
     render() {
-        return (
-            <BrowserRouter>
-                <Switch>
-                    <Route exact path="/login" name="Login Page" component={Login} />
-                    <Route exact path="/register" name="Register Page" component={Register} />
-                    <Route path="/" name="Home" component={DefaultLayout} />
-                    <Route component={Notfound} />
-                </Switch>
-            </BrowserRouter>
-        );
+        if(this.props.auth.uid){
+            return (
+                <BrowserRouter>
+                    <Switch>
+                        <Route exact path="/login" name="Login Page" component={Login} />
+                        <Route exact path="/register" name="Register Page" component={Register} />
+                        <Route path="/" name="Home" component={DefaultLayout} />
+                        {/*<Route component={Notfound} />*/}
+                    </Switch>
+                </BrowserRouter>
+            );
+        }else {
+            return (
+                <BrowserRouter>
+                    <Switch>
+                        <Route exact path="/login" name="Login Page" component={Login} />
+                        <Route exact path="/register" name="Register Page" component={Register} />
+                        <Redirect to='/login' />
+                    </Switch>
+                </BrowserRouter>
+            );
+        }
     }
 }
 
 
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
-
+        auth: state.firebase.auth
     }
 }
 

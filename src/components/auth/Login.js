@@ -4,6 +4,9 @@ import { Button, Card, CardBody, Col, Container, Form, Input, InputGroup, InputG
 import { connect } from 'react-redux'
 import firebase from 'firebase/app';
 import { signIn } from '../../store/actions/authActions'
+import { Redirect } from 'react-router-dom'
+
+
 
 class Login extends Component {
   constructor() {
@@ -26,7 +29,9 @@ class Login extends Component {
   }
 
   render() {
-    // const { authError } = this.props;
+    const { authError, auth } = this.props;
+    if(auth.uid) return <Redirect to='/dashboard' />
+
     return (
       <div className="app flex-row align-items-center">
         <Container>
@@ -82,6 +87,7 @@ class Login extends Component {
 const mapStateToProps = (state) => {
   return {
     authError: state.auth.authError,
+    auth: state.firebase.auth,
   }
 }
 
