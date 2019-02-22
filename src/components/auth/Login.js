@@ -81,7 +81,7 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    authError: state.auth.authError
+    authError: state.auth.authError,
   }
 }
 
@@ -92,7 +92,7 @@ const mapDispatchToProps = (dispatch) => {
               credentials.email,
               credentials.password
           ).then(() => {
-              dispatch({ type: 'LOGIN_SUCCESS' })
+              dispatch({ type: 'LOGIN_SUCCESS' });
           }).catch((err) => {
               dispatch({ type: 'LOGIN_ERROR', err })
           });

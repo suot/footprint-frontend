@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
 import './App.scss';
 import Notfound from './components/auth/Notfound'
+import { connect } from 'react-redux'
+
 
 const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
 
@@ -39,4 +41,14 @@ class App extends Component {
     }
 }
 
-export default App;
+
+
+const mapStateToProps = (state) => {
+    console.log(state);
+    return {
+
+    }
+}
+
+//export default App;
+export default connect(mapStateToProps)(App);

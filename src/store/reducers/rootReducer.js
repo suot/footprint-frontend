@@ -1,6 +1,6 @@
+import { combineReducers } from 'redux'
 import authReducer from './authReducer'
 import footprintReducer from './footprintReducer'
-import { combineReducers } from 'redux'
 import { firestoreReducer } from 'redux-firestore'
 import { firebaseReducer } from 'react-redux-firebase'
 
