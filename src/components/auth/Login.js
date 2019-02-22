@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button, Card, CardBody, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import { connect } from 'react-redux'
 import firebase from 'firebase/app';
-
+import { signIn } from '../../store/actions/authActions'
 
 class Login extends Component {
   constructor() {
@@ -22,7 +22,7 @@ class Login extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.signIn(this.state);
+    this.props.login(this.state);
   }
 
   render() {
@@ -87,16 +87,17 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      signIn: (credentials) =>  {
-          firebase.auth().signInWithEmailAndPassword(
-              credentials.email,
-              credentials.password
-          ).then(() => {
-              dispatch({ type: 'LOGIN_SUCCESS' });
-          }).catch((err) => {
-              dispatch({ type: 'LOGIN_ERROR', err })
-          });
-      }
+      login: (credentials) => dispatch(signIn(credentials))
+      // logIn: (credentials) =>  {
+      //     firebase.auth().signInWithEmailAndPassword(
+      //         credentials.email,
+      //         credentials.password
+      //     ).then(() => {
+      //         dispatch({ type: 'LOGIN_SUCCESS' });
+      //     }).catch((err) => {
+      //         dispatch({ type: 'LOGIN_ERROR', err })
+      //     });
+      // }
 
   }
 }

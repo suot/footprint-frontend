@@ -4,6 +4,7 @@ import { AppHeaderDropdown, AppNavbarBrand, AppSidebarToggler } from '@coreui/re
 import logo from '../../assets/img/footprint.png'
 import miniLogo from '../../assets/img/footprint_mini.png'
 // import {Link} from "react-router-dom";
+import { signOut } from '../../store/actions/authActions'
 
 import { connect } from 'react-redux'
 import firebase from 'firebase/app';
@@ -51,7 +52,7 @@ class DefaultHeader extends Component {
 
               <DropdownItem header tag="div" className="text-center"><strong>Settings</strong></DropdownItem>
 
-              <DropdownItem onClick={this.props.logOut} ><i className="fa fa-lock"></i> Logout</DropdownItem>
+              <DropdownItem onClick={this.props.logout} ><i className="fa fa-lock"></i> Logout</DropdownItem>
             </DropdownMenu>
           </AppHeaderDropdown>
         </Nav>
@@ -66,13 +67,15 @@ DefaultHeader.defaultProps = {};
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        logOut: () =>  {
-            firebase.auth().signOut().then(() => {
-                dispatch({ type: 'LOGOUT_SUCCESS' })
-            }).catch((err) => {
-                dispatch({ type: 'LOGOUT_ERROR', err })
-            });
-        }
+        logout: () => dispatch(signOut())
+
+        // logOut: () =>  {
+        //     firebase.auth().signOut().then(() => {
+        //         dispatch({ type: 'LOGOUT_SUCCESS' })
+        //     }).catch((err) => {
+        //         dispatch({ type: 'LOGOUT_ERROR', err })
+        //     });
+        // }
 
     }
 }

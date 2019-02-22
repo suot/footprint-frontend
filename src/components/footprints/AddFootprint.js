@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Card, CardBody, CardFooter, CardHeader, Col, FormGroup, Form, Input, Label, Row } from 'reactstrap';
 import { connect } from 'react-redux'
 import { getFirestore } from 'redux-firestore'
+import { addFootprint } from '../../store/actions/footprintActions'
 
 
 class AddFootprint extends Component {
@@ -122,19 +123,19 @@ class AddFootprint extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        //addFootprint: (footprint) => dispatch(addFootprint(footprint))
+        addFootprint: (footprint) => dispatch(addFootprint(footprint))
        
-        addFootprint: (footprint) => {
-            const firestore = getFirestore();
-            firestore.collection('footprints').add({
-                ...footprint,
-                userId: 55
-            }).then(()=>{
-                dispatch({ type: 'ADD_FOOTPRINT', footprint });
-            }).catch((err)=>{
-                dispatch({ type: 'ADD_FOOTPRINT_ERROR', err })
-            })
-        }
+        // addFootprint: (footprint) => {
+        //     const firestore = getFirestore();
+        //     firestore.collection('footprints').add({
+        //         ...footprint,
+        //         userId: 55
+        //     }).then(()=>{
+        //         dispatch({ type: 'ADD_FOOTPRINT', footprint });
+        //     }).catch((err)=>{
+        //         dispatch({ type: 'ADD_FOOTPRINT_ERROR', err })
+        //     })
+        // }
         
         
     }
