@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Button, Card, CardBody, CardFooter, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import { signUp } from '../../store/actions/authActions'
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
 
 class Register extends Component {
@@ -22,14 +25,13 @@ class Register extends Component {
 
   addUser = e => {
     e.preventDefault();
-
-    this.setState({
-      fullname: "",
-      email: ""
-    });
+    this.props.register(this.state);
   };
 
   render() {
+    const { authError, auth } = this.props;
+    if(auth.uid) return <Redirect to='/' />
+
     return (
       <div className="app flex-row align-items-center">
         <Container>
@@ -43,7 +45,7 @@ class Register extends Component {
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>@</InputGroupText>
                       </InputGroupAddon>
-                      <Input type="text" placeholder="Email" autoComplete="email" id="email" name="email" onChange={this.updateInput} />
+                      <Input type="text" placeholder="Email" autoComplete="email" id="email" onChange={this.updateInput} />
                     </InputGroup>
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
@@ -51,7 +53,7 @@ class Register extends Component {
                           <i className="icon-lock"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="password" placeholder="Password" autoComplete="new-password" id="passwordOne" name="password" onChange={this.updateInput} />
+                      <Input type="password" placeholder="Password" autoComplete="password" id="password" onChange={this.updateInput} />
                     </InputGroup>
                     <InputGroup className="mb-4">
                       <InputGroupAddon addonType="prepend">
@@ -59,10 +61,16 @@ class Register extends Component {
                           <i className="icon-user"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input className="mr-1" type="text" placeholder="First Name" autoComplete="first name" id="firstName" name="firstName" />
-                      <Input type="text" placeholder="Last Name" autoComplete="last name" id="lastName" name="lastName" />
+                      <Input className="mr-1" type="text" placeholder="First Name" autoComplete="first name" id="firstName" name="firstName" onChange={this.updateInput} />
+                      <Input type="text" placeholder="Last Name" autoComplete="last name" id="lastName" name="lastName" onChange={this.updateInput} />
                     </InputGroup>
-                    <Button color="primary" block type="submit">Create Account</Button>
+
+                    <Row>
+                        <Button color="primary" block type="submit">Create Account</Button>
+                        <div>
+                          { authError ? <p>{ authError }</p> : null }
+                        </div>
+                    </Row>
                   </Form>
                 </CardBody>
                 <CardFooter className="p-4">
@@ -84,4 +92,19 @@ class Register extends Component {
   }
 }
 
-export default Register;
+
+const mapStateToProps = (state) => {
+  return {
+    authError: state.auth.authError,
+    // status: state.auth.status,
+    auth: state.firebase.auth,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    register: (newUser) => dispatch(signUp(newUser))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

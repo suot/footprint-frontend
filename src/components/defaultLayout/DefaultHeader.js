@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import {Badge, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, NavLink} from 'reactstrap';
+import { Badge, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, NavLink} from 'reactstrap';
 import { AppHeaderDropdown, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
 import logo from '../../assets/img/footprint.png'
 import miniLogo from '../../assets/img/footprint_mini.png'
 import { connect } from 'react-redux'
 import firebase from 'firebase/app';
 import { signOut } from '../../store/actions/authActions'
+import { Avatar } from '@material-ui/core';
 
 
 class DefaultHeader extends Component {
-
-
-  render() {    
+  render() {
+    const { profile } = this.props;
     return (
       <React.Fragment>
         <AppSidebarToggler className="d-lg-none" display="md" mobile />
@@ -34,8 +34,10 @@ class DefaultHeader extends Component {
 
           <AppHeaderDropdown direction="down" className="mr-4">
             <DropdownToggle nav>
-              <img src={'/assets/avatars/Suo Tian.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
-              <span>user name</span>
+                {
+                    profile.avatar ? <Avatar src={profile.avatar} alt={ profile.firstName + " " + profile.lastName } />
+                    : <Avatar>{ profile.initials }</Avatar>
+                }
             </DropdownToggle>
               
             <DropdownMenu right style={{ right: 'auto' }}>
@@ -60,10 +62,13 @@ class DefaultHeader extends Component {
   }
 }
 
-DefaultHeader.propTypes = {};
-DefaultHeader.defaultProps = {};
 
-
+const mapStateToProps = (state) => {
+    return {
+        auth: state.firebase.auth,
+        profile: state.firebase.profile,
+    }
+}
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -80,4 +85,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(DefaultHeader);
+export default connect(mapStateToProps, mapDispatchToProps)(DefaultHeader);

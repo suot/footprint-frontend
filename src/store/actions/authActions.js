@@ -24,3 +24,48 @@ export const signOut = () => {
         });
     }
 }
+
+export const signUp = (newUser) => {
+    return (dispatch, getState, {getFirebase, getFirestore}) => {
+
+        const firebase = getFirebase();
+        const firestore = getFirestore();
+
+        firebase.auth().createUserWithEmailAndPassword(
+            newUser.email,
+            newUser.password
+        ).then((resp) => {
+            //create a user document in users collection
+            return firestore.collection('users').doc(resp.user.uid).set({
+                firstName: newUser.firstName,
+                lastName: newUser.lastName,
+                initials: newUser.firstName.slice(0, 1),
+            })
+        }).then(()=>{
+            dispatch({ type: 'SIGNUP_SUCCESS' })
+        }).catch(err=>{
+            dispatch({ type: 'SIGNUP_ERROR', err})
+        })
+    }
+}
+
+
+export const updateProfile = (newProfile) => {
+    return (dispatch, getState, {getFirebase, getFirestore}) => {
+
+        const firebase = getFirebase();
+        const firestore = getFirestore();
+
+        firestore.collection('users').doc(newProfile.uid).set({
+            firstName: newProfile.firstName,
+            lastName: newProfile.lastName,
+            gender: newProfile.gender,
+            personalStatus: newProfile.personalStatus,
+            avatar: newProfile.avatar,
+        }).then(()=>{
+            dispatch({ type: 'PROFILE_UPDATE_SUCCESS' })
+        }).catch(err=>{
+            dispatch({ type: 'PROFILE_UPDATE_ERROR', err})
+        })
+    }
+}

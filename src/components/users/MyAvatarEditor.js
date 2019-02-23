@@ -92,4 +92,6 @@ class MyAvatarEditor extends React.Component {
     }
 }
 
+
+
 export default MyAvatarEditor
