@@ -1,8 +1,7 @@
 import React from 'react';
 import { Col, FormGroup, Input, Label, Row } from 'reactstrap';
 import { connect } from 'react-redux'
-import { firestoreConnect } from 'react-redux-firebase'
-import { compose } from 'redux'
+
 
 const FootprintDetails = ({footprint}) => {
     if(footprint){
@@ -77,9 +76,5 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-export default compose(
-    connect(mapStateToProps),
-    firestoreConnect([
-        { collection: 'footprints'}
-    ])
-)(FootprintDetails);
+
+export default connect(mapStateToProps)(FootprintDetails);

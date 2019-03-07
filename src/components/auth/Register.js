@@ -7,8 +7,8 @@ import { Redirect } from 'react-router-dom'
 
 class Register extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       email: "",
       password: "",

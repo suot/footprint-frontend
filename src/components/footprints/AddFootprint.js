@@ -25,6 +25,7 @@ class AddFootprint extends Component {
         e.preventDefault();
         // console.log(this.state);
         this.props.addFootprint(this.state.footprint);
+        this.props.history.push('/');
     }
 
 
@@ -71,8 +72,11 @@ class AddFootprint extends Component {
                                                     <option value="Busan">Busan</option>
                                                     <option value="Lahore">Lahore</option>
                                                     <option value="Seoul">Seoul</option>
-                                                    <option value="Kyoto">Toronto</option>
                                                     <option value="Kyoto">Kyoto</option>
+                                                    <option value="Toronto">Toronto</option>
+                                                    <option value="Vancouver">Vancouver</option>
+                                                    <option value="Calgary">Calgary</option>
+                                                    <option value="Windsor">Windsor</option>
                                                 </Input>
                                             </FormGroup>
                                         </Col>

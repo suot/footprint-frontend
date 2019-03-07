@@ -2,7 +2,7 @@ export default {
   items: [
     {
       name: 'Dashboard',
-      url: '/dashboard',
+      url: '/',
       icon: 'icon-speedometer',
       // badge: {
       //   variant: 'info',
@@ -19,15 +19,15 @@ export default {
     //   class: ''             // optional class names space delimited list for title item ex: "text-center"
     // },
     {
-      name: 'My footprints',
-      url: '/footprints/me',
+      name: 'Add footprints',
+      url: '/footprint/add',
       icon: 'icon-drop',
     },
-    {
-      name: 'Friends\' footprints',
-      url: '/footprints/friends',
-      icon: 'icon-pencil',
-    },
+    // {
+    //   name: 'Friends\' footprints',
+    //   url: '/footprint/friends',
+    //   icon: 'icon-pencil',
+    // },
     // {
     //   name: 'Base',
     //   url: '/base',
