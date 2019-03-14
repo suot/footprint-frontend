@@ -6,7 +6,7 @@ const AddFootprint = React.lazy(() => import('./components/footprints/AddFootpri
 // const FootprintDetails = React.lazy(() => import('./components/footprints/FootprintDetails'));
 const Notfound = React.lazy(() => import('./components/auth/Notfound'));
 const Notifications = React.lazy(() => import('./components/dashboard/Notifications'));
-const MyFootprints = React.lazy(() => import('./components/map/MyFootprints'));
+const Map = React.lazy(() => import('./components/map/Map'));
 
 
 const routes = [
@@ -16,7 +16,7 @@ const routes = [
   { path: '/footprint/add', name: 'AddFootprint', component: AddFootprint },
   // { path: '/footprint/:id', name: 'FootprintDetailsById', component: FootprintDetails },
 
-  { path: '/footprint/:uid', name: 'FootprintsByUid', component: MyFootprints },
+  { path: '/footprint/:uid', name: 'FootprintsByUid', component: Map },
   { name: 'NotFound', component: Notfound },
 ];
 
