@@ -10,6 +10,8 @@ import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 
 import styled from 'styled-components';
 import {connect} from "react-redux";
+import {addFootprint, deleteFootprint} from "../../store/actions/travelActions";
+
 
 
 const Wrapper = styled.div`
@@ -17,12 +19,21 @@ const Wrapper = styled.div`
     height: ${props => props.height};
 `;
 
+let map;
 
 class Map extends React.Component {
+
+    componentDidUpdate(prevProps) {
+        if (this.props.lng !== prevProps.lng) {
+            map.panTo([this.props.lat, this.props.lng]);
+        }
+    }
+
     componentDidMount(){
-        const map = L.map('map1', {
-            center: [39.9, 116.4],
-            zoom: 12
+        const {lat, lng, addFootprint, deleteFootprint} = this.props;
+        map = L.map('map1', {
+            center: [lat, lng],
+            zoom: 10
         });
 
         L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -37,16 +48,18 @@ class Map extends React.Component {
             iconUrl: '/assets/redMarker.png',
             iconSize: [15, 30],
         });
+
         map.on('click', function(e) {
-            console.log(e.latlng);
+            //console.log(e.latlng);
             const marker = L.marker(e.latlng, {icon: markerIcon}).addTo(map);
+            addFootprint(e.latlng);
             //marker.bindPopup("<b>Hello world!</b><br>");
             //marker.bindTooltip('Lat: ' + e.latlng.lat + '<br>Lng: '+e.latlng.lng);
 
             marker.on('click', function() {
                 map.removeLayer(this);
+                deleteFootprint(this.getLatLng());
             });
-
         });
 
         // const markers = L.markerClusterGroup();
@@ -67,9 +80,7 @@ class Map extends React.Component {
         //     radius: 500
         // }).addTo(map);
         // circle.bindPopup("I am a circle.");
-
     }
-
 
     render() {
         return (
@@ -80,14 +91,25 @@ class Map extends React.Component {
 
 
 
-const mapStateToProps = (state, ownProps) => {
-    // const uid = ownProps.match.params.uid;
-    // // const footprints = state.firestore.data.footprints;
-    // // const footprint = footprints ? footprints[id] : null
-    // return {
-    //     // footprint: footprint,
-    // }
+const mapStateToProps = (state) => {
+    if(state.travel.city.lat === '' && state.travel.city.lng === ''){
+        return {
+            lat: 39.9,
+            lng: 116.4
+        }
+    }else{
+        return {
+            lat: Number.parseFloat(state.travel.city.lat),
+            lng: Number.parseFloat(state.travel.city.lng)
+        }
+    }
 }
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addFootprint: (newFootprint) => dispatch(addFootprint(newFootprint)),
+        deleteFootprint: (footprint) => dispatch(deleteFootprint(footprint))
+    }
+}
 
-export default connect(mapStateToProps)(Map);
+export default connect(mapStateToProps, mapDispatchToProps)(Map);

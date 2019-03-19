@@ -2,7 +2,7 @@ import React from 'react';
 
 const Dashboard = React.lazy(() => import('./components/dashboard/Dashboard'));
 const Profile = React.lazy(() => import('./components/users/Profile'));
-const AddFootprint = React.lazy(() => import('./components/footprints/AddFootprint'));
+const AddFootprint = React.lazy(() => import('./components/footprints/AddTravel'));
 // const FootprintDetails = React.lazy(() => import('./components/footprints/FootprintDetails'));
 const Notfound = React.lazy(() => import('./components/auth/Notfound'));
 const Notifications = React.lazy(() => import('./components/dashboard/Notifications'));

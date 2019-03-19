@@ -1,54 +1,59 @@
 import React, { Component } from 'react';
-import { Button, Card, CardBody, CardFooter, CardHeader, Col, FormGroup, Form, Input, Label, Row } from 'reactstrap';
+import { Button, Card, CardBody, CardFooter, CardHeader, Col, FormGroup, Form, Input, Label, Row, InputGroup } from 'reactstrap';
 import { connect } from 'react-redux'
 import { getFirestore } from 'redux-firestore'
-import { addFootprint } from '../../store/actions/footprintActions'
+import { addTravel } from '../../store/actions/travelActions'
 import Map from '../map/Map';
+import CityInput from './CityInput'
 
-class AddFootprint extends Component {
+
+class AddTravel extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            footprint:{
-                country: "",
-                city: "",
-                startDate: "",
-                endDate: "",
+            travel:{
+                city: {
+                    name:'',
+                    country:'',
+                    lat:'',
+                    lng:''
+                },
+                startDate:'',
+                endDate:'',
                 cost: 0,
                 rating: 0,
             }
         };
     }
 
-    addFootprintSubmit = (e) => {
+    addTravelSubmit = (e) => {
         e.preventDefault();
         // console.log(this.state);
-        this.props.addFootprint(this.state.footprint);
+        this.props.addTravel(this.state.travel);
         this.props.history.push('/');
     }
 
 
     updateInput = (e) => {
         this.setState({
-            footprint:{
-                ...this.state.footprint,
+            travel:{
+                ...this.state.travel,
                 [e.target.id]: e.target.value
             },
         });
 
     }
 
-
     render() {
         return (
             <div className="animated fadeIn mt-3">
-                <Form onSubmit={this.addFootprintSubmit}>
+                <Form>
                     <Row>
                         <Col xs="12" md="12">
                             <Card>
                                 <CardHeader>
-                                    <strong>Add footprint</strong>
+                                    <strong>Add a new travel record</strong>
                                 </CardHeader>
                                 <CardBody>
                                     <Row>
@@ -71,18 +76,24 @@ class AddFootprint extends Component {
                                                 {/*</Col>*/}
                                             {/*</FormGroup>*/}
 
-                                            <FormGroup row className="my-0">
-                                                <Label htmlFor="country">Country</Label>
-                                                <Input type="text" id="country" onChange={this.updateInput}>                                                       </Input>
+
+                                            <FormGroup row className="ml-1">
+                                                <Label className="mr-2">City</Label>
+                                                <CityInput />
                                             </FormGroup>
 
-                                            <FormGroup row className="my-0">
-                                                <Label htmlFor="city">City</Label>
-                                                <Input type="text" id="city" onChange={this.updateInput}>                                                       </Input>
+                                            <FormGroup row className="ml-1">
+                                                <Label htmlFor="time">Travel time</Label>
+                                                <Input type="text" id="time" onChange={this.updateInput}>                                                       </Input>
                                             </FormGroup>
 
-                                            <FormGroup row className="my-0">
-                                                <Label htmlFor="cityType">City type</Label>
+                                            <FormGroup row className="ml-1">
+                                                <Label htmlFor="cost">Cost</Label>
+                                                <Input type="text" id="cost" onChange={this.updateInput}/>
+                                            </FormGroup>
+
+                                            <FormGroup row className="ml-1">
+                                                <Label htmlFor="cityType">Travel type</Label>
                                                 <Input type="select" id="cityType" onChange={this.updateInput}>
                                                     <option value=""></option>
                                                     <option value="Metropolis">Metropolis</option>
@@ -92,23 +103,8 @@ class AddFootprint extends Component {
                                                 </Input>
                                             </FormGroup>
 
-                                            <FormGroup row className="my-0">
-                                                <Label htmlFor="time">Travel time</Label>
-                                                <Input type="text" id="time" onChange={this.updateInput}>                                                       </Input>
-                                            </FormGroup>
-
-                                            <FormGroup row className="my-0">
-                                                <Label htmlFor="cost">Cost</Label>
-                                                <Input type="select" id="cost" onChange={this.updateInput}>
-                                                    <option value=""></option>
-                                                    <option value="3">Expensive</option>
-                                                    <option value="2">Medium</option>
-                                                    <option value="1">Cheap</option>
-                                                </Input>
-                                            </FormGroup>
-
-                                            <FormGroup row className="my-0">
-                                                <Label htmlFor="recommend">Recommend to others</Label>
+                                            <FormGroup row className="ml-1">
+                                                <Label htmlFor="recommend">Rating</Label>
                                                 <Input type="select" id="recommend" onChange={this.updateInput}>
                                                     <option value=""></option>
                                                     <option value="True">Yes</option>
@@ -117,14 +113,12 @@ class AddFootprint extends Component {
                                             </FormGroup>
                                         </Col>
                                         <Col xs="9" md="9">
-                                            <div>
-                                                <Map/>
-                                            </div>
+                                            <Map/>
                                         </Col>
                                     </Row>
                                 </CardBody>
                                 <CardFooter>
-                                    <Button type="submit" color="primary" className="mr-2"><i className="fa fa-dot-circle-o"></i> Add</Button>
+                                    <Button type="button" color="primary" className="mr-2" onClick={this.addTravelSubmit}><i className="fa fa-dot-circle-o"></i> Add</Button>
                                     <Button type="reset" color="danger"><i className="fa fa-ban"></i> Reset</Button>
                                 </CardFooter>
                             </Card>
@@ -138,7 +132,7 @@ class AddFootprint extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addFootprint: (footprint) => dispatch(addFootprint(footprint))
+        addTravel: (travel) => dispatch(addTravel(travel))
        
         // addFootprint: (footprint) => {
         //     const firestore = getFirestore();
@@ -156,4 +150,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(AddFootprint);
+export default connect(null, mapDispatchToProps)(AddTravel);
