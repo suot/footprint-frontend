@@ -1,6 +1,6 @@
 import React from 'react'
 //import ReactAutocomplete from 'react-autocomplete'
-import cities from 'cities.json';
+import cities from '../../../node_modules/cities.json/cities';
 import Autosuggest from 'react-autosuggest';
 import '../../assets/cityInput.css';
 import {addCity} from "../../store/actions/travelActions";
@@ -50,8 +50,8 @@ class CityInput extends React.Component {
             let newCity = {
                 name: city[0],
                 country: city[1],
-                lat: city[2],
-                lng: city[3]
+                lat: Number.parseFloat(city[2]),
+                lng: Number.parseFloat(city[3])
             };
 
             this.props.addCity(newCity);

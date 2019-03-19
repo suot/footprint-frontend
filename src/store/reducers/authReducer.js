@@ -1,6 +1,6 @@
 const initState = {
     authError: null,
-    // status: null
+    //region: null
 }
 
 const authReducer = (state = initState, action) => {

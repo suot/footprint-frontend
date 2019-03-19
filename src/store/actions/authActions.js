@@ -60,7 +60,7 @@ export const updateProfile = (newProfile) => {
             firstName: newProfile.firstName,
             lastName: newProfile.lastName,
             gender: newProfile.gender,
-            personalStatus: newProfile.personalStatus,
+            region: newProfile.region,
             avatar: newProfile.avatar,
         }).then(()=>{
             dispatch({ type: 'PROFILE_UPDATE_SUCCESS' })

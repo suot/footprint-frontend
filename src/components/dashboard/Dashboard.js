@@ -8,7 +8,7 @@ class Dashboard extends Component {
     render(){
         return(
             <div className="dashboard container">
-                <FootprintList footprints={this.props.footprints} />
+                {/*<FootprintList footprints={this.props.footprints} />*/}
             </div>
         )
     }

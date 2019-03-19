@@ -47,16 +47,10 @@ class Profile extends Component {
     const auth = this.props.auth;
 
     this.state = {
-      // firstName: profile.firstName,
-      // lastName: profile.lastName,
-      // gender: profile.gender,
-      // personalStatus: profile.personalStatus,
-      // avatar: profile.avatar,
-
       firstName: "",
       lastName: "",
       gender: "",
-      personalStatus: "",
+      region: "",
       avatar: "",
       uid: auth.uid,
       email: auth.email,
@@ -72,7 +66,7 @@ class Profile extends Component {
         firstName: this.props.profile.firstName,
         lastName: this.props.profile.lastName,
         gender: this.props.profile.gender,
-        personalStatus: this.props.profile.personalStatus,
+        region: this.props.profile.region,
         avatar: this.props.profile.avatar,
       });
     }
@@ -154,13 +148,12 @@ class Profile extends Component {
                           </Col>
                           <Col xs="6">
                             <FormGroup>
-                              <Label htmlFor="marriage">Personal status</Label>
-                              <Input type="select" id="personalStatus" value={this.state.personalStatus}
-                                     onChange={this.updateInput}>
-                                <option>Please select</option>
-                                <option value="Single">Single</option>
-                                <option value="Coupled without kid">Coupled without kid</option>
-                                <option value="Coupled with kid">Coupled with kid</option>
+                              <Label htmlFor="region">Current region</Label>
+                              <Input type="select" id="region" value={this.state.region} onChange={this.updateInput}>
+                                <option value=""></option>
+                                <option value="Canada">Canada</option>
+                                <option value="Asia">Asia</option>
+                                <option value="Asia">Other</option>
                               </Input>
                             </FormGroup>
                           </Col>

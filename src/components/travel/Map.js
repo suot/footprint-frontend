@@ -84,7 +84,8 @@ class Map extends React.Component {
 
     render() {
         return (
-            <Wrapper width={'900px'} height={'480px'} id={'map1'} />
+            <Wrapper width='100%' height='100%' id={'map1'} />
+            // <Wrapper width={'900px'} height={'480px'} id={'map1'} />
         )
     }
 }
@@ -92,15 +93,15 @@ class Map extends React.Component {
 
 
 const mapStateToProps = (state) => {
-    if(state.travel.city.lat === '' && state.travel.city.lng === ''){
+    if(!state.travel.city.lat && !state.travel.city.lng){
         return {
             lat: 39.9,
             lng: 116.4
         }
     }else{
         return {
-            lat: Number.parseFloat(state.travel.city.lat),
-            lng: Number.parseFloat(state.travel.city.lng)
+            lat: state.travel.city.lat,
+            lng: state.travel.city.lng
         }
     }
 }

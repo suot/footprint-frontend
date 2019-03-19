@@ -30,7 +30,7 @@ class Register extends Component {
 
   render() {
     const { authError, auth } = this.props;
-    if(auth.uid) return <Redirect to='/' />
+    if(auth.uid) return <Redirect to='/travel/add' />
 
     return (
       <div className="app flex-row align-items-center">

@@ -19,8 +19,8 @@ export default {
     //   class: ''             // optional class names space delimited list for title item ex: "text-center"
     // },
     {
-      name: 'Add travel',
-      url: '/footprint/add',
+      name: 'Record travel',
+      url: '/travel/add',
       icon: 'icon-drop',
     },
     // {
