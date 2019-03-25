@@ -53,7 +53,6 @@ export const signUp = (newUser) => {
 export const updateProfile = (newProfile) => {
     return (dispatch, getState, {getFirebase, getFirestore}) => {
 
-        const firebase = getFirebase();
         const firestore = getFirestore();
 
         firestore.collection('users').doc(newProfile.uid).set({

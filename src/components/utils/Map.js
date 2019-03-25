@@ -22,7 +22,6 @@ const Wrapper = styled.div`
 let map;
 
 class Map extends React.Component {
-
     componentDidUpdate(prevProps) {
         if (this.props.lng !== prevProps.lng) {
             map.panTo([this.props.lat, this.props.lng]);
@@ -36,10 +35,23 @@ class Map extends React.Component {
             zoom: 10
         });
 
+        //OpenStreetMap tileLayer
         L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            minZoom: 2,
             foo: 'bar',
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
         }).addTo(map);
+
+
+        //Google tileLayer
+        // L.tileLayer('http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}',{
+        //     maxZoom: 20,
+        //     minZoom: 2,
+        //     subdomains:['mt0','mt1','mt2','mt3'],
+        //     attribution: 'Tile Layer &copy; <a href="https://www.google.com/maps">Google Maps</a>'
+        // }).addTo(map);
+
+
 
         //search a city
         L.Control.geocoder().addTo(map);
@@ -84,7 +96,7 @@ class Map extends React.Component {
 
     render() {
         return (
-            <Wrapper width='100%' height='100%' id={'map1'} />
+            <Wrapper width='100%' height='450px' id={'map1'} />
             // <Wrapper width={'900px'} height={'480px'} id={'map1'} />
         )
     }
@@ -93,15 +105,15 @@ class Map extends React.Component {
 
 
 const mapStateToProps = (state) => {
-    if(!state.travel.city.lat && !state.travel.city.lng){
+    if(!state.travel.newTravel.city.lat && !state.travel.newTravel.city.lng){
         return {
             lat: 39.9,
             lng: 116.4
         }
     }else{
         return {
-            lat: state.travel.city.lat,
-            lng: state.travel.city.lng
+            lat: state.travel.newTravel.city.lat,
+            lng: state.travel.newTravel.city.lng
         }
     }
 }

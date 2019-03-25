@@ -1,14 +1,14 @@
 export default {
   items: [
-    {
-      name: 'Dashboard',
-      url: '/',
-      icon: 'icon-speedometer',
-      // badge: {
-      //   variant: 'info',
-      //   text: 'NEW',
-      // },
-    },
+    // {
+    //   name: 'Dashboard',
+    //   url: '/',
+    //   icon: 'icon-speedometer',
+    //   // badge: {
+    //   //   variant: 'info',
+    //   //   text: 'NEW',
+    //   // },
+    // },
     // {
     //   title: true,
     //   name: 'Theme',
@@ -18,32 +18,27 @@ export default {
     //   },
     //   class: ''             // optional class names space delimited list for title item ex: "text-center"
     // },
+    // {
+    //   name: 'Record travel',
+    //   url: '/travel/add',
+    //   icon: 'icon-drop',
+    // },
     {
-      name: 'Record travel',
-      url: '/travel/add',
-      icon: 'icon-drop',
+      name: 'Travel',
+      url: '/travel',
+      icon: 'icon-speedometer',
+      children: [
+        {
+          name: 'Record a travel',
+          url: '/travel/add',
+          icon: 'icon-drop',
+        },
+        {
+          name: 'List your travels',
+          url: '/travel/list',
+          icon: 'icon-puzzle',
+        },
+      ],
     },
-    // {
-    //   name: 'Friends\' footprints',
-    //   url: '/footprint/friends',
-    //   icon: 'icon-pencil',
-    // },
-    // {
-    //   name: 'Base',
-    //   url: '/base',
-    //   icon: 'icon-puzzle',
-    //   children: [
-    //     {
-    //       name: 'Breadcrumbs',
-    //       url: '/base/breadcrumbs',
-    //       icon: 'icon-puzzle',
-    //     },
-    //     {
-    //       name: 'Cards',
-    //       url: '/base/cards',
-    //       icon: 'icon-puzzle',
-    //     },
-    //   ],
-    // },
   ],
 };

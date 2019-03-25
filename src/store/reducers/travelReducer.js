@@ -1,50 +1,68 @@
 
-
 const initState = {
-    city: {
-        name: null,
-        country: null,
-        lat: null,
-        lng: null
+    newTravel:{
+        city: {
+            name: null,
+            country: null,
+            lat: null,
+            lng: null
+        },
+        startDate: null,
+        endDate: null,
+        rating: null,
+        footprints: [],
     },
-    startDate: null,
-    endDate: null,
-    rating: null,
-    footprints: []
+    travelList: null,
+    sourceDbServer: null,
 }
 
 const travelReducer = (state = initState, action) => {
     switch (action.type) {
         case 'ADD_CITY':{
             console.log('add city', action.city);
-            state.city = action.city;
+            state.newTravel.city = action.city;
             return state;
         }
         case 'ADD_TRAVEL_TIME':{
             console.log('add travel time', action.startDate, action.endDate);
-            state.startDate = action.startDate;
-            state.endDate = action.endDate;
+            state.newTravel.startDate = action.startDate;
+            state.newTravel.endDate = action.endDate;
             return state;
         }
         case 'ADD_TRAVEL_RATING':{
             console.log('add city rating', action.rating);
-            state.rating = action.rating;
+            state.newTravel.rating = action.rating;
             return state;
         }
         case 'ADD_FOOTPRINT':{
             console.log('add footprint', action.footprint);
-            state.footprints.push(action.footprint);
+            state.newTravel.footprints.push(action.footprint);
             return state;
         }
         case 'DELETE_FOOTPRINT':{
             console.log('delete footprint', action.footprint);
-            const newFootprints = state.footprints.filter(footprint1 => footprint1 != action.footprint);
-            state.footprints = newFootprints;
-            // console.log(state.footprints);
+            const newFootprints = state.newTravel.footprints.filter(footprint1 => footprint1 !== action.footprint);
+            state.newTravel.footprints = newFootprints;
+            // console.log(state.newTravel.footprints);
             return state;
         }
         case 'ADD_TRAVEL':{
-            console.log('Added travel record ' + action._id + ' to MongoDB server ' + action.region);
+            console.log('Added a new travel record to MongoDB ' + state.sourceDbServer + ' : ', action.travel);
+            return state;
+        }
+        case 'DELETE_TRAVEL':{
+            console.log('Deleted the travel record: ' + action._id + ' from MongoDB: ' + state.sourceDbServer);
+            return state;
+        }
+        case 'CHANGE_SERVER':{
+            const region = action.region;
+
+            if(region === 'Canada' || region === null || region === ''){
+                state.sourceDbServer = 'http://localhost:3001';
+            }else{
+                state.sourceDbServer = 'http://localhost:3002';
+            }
+            console.log("sourceDbServer: ", state.sourceDbServer);
             return state;
         }
         default:

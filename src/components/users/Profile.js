@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import {
   Button,
   Card,
@@ -14,65 +15,26 @@ import {
 
 import MyAvatarEditor from './MyAvatarEditor';
 import { updateProfile } from '../../store/actions/authActions'
-import { connect } from 'react-redux'
+import { changeServer } from "../../store/actions/travelActions";
 
 
 class Profile extends Component {
-  // constructor(props) {
-  //   super(props);
-  //
-  //   this.toggle = this.toggle.bind(this);
-  //   this.toggleFade = this.toggleFade.bind(this);
-  //   this.state = {
-  //     collapse: true,
-  //     fadeIn: true,
-  //     timeout: 300,
-  //     profile: {
-  //       avatar: null,
-  //     }
-  //   };
-  // }
-  //
-  // toggle() {
-  //   this.setState({ collapse: !this.state.collapse });
-  // }
-  // toggleFade() {
-  //   this.setState((prevState) => { return { fadeIn: !prevState }});
-  // }
-
   constructor(props) {
     super(props);
 
-    //const profile = this.props.profile;
+    const profile = this.props.profile;
     const auth = this.props.auth;
 
     this.state = {
-      firstName: "",
-      lastName: "",
-      gender: "",
-      region: "",
-      avatar: "",
+      firstName: profile.firstName,
+      lastName: profile.lastName,
+      gender: profile.gender,
+      region: profile.region,
+      avatar: profile.avatar,
       uid: auth.uid,
       email: auth.email,
     };
-
   }
-
-
-  componentDidUpdate(prevProps, prevState) {
-    //synchronizing profile from firebase cloud database costs time.
-    if(prevProps.profile.isEmpty && (!this.props.profile.isEmpty)){
-      this.setState({
-        firstName: this.props.profile.firstName,
-        lastName: this.props.profile.lastName,
-        gender: this.props.profile.gender,
-        region: this.props.profile.region,
-        avatar: this.props.profile.avatar,
-      });
-    }
-  }
-
-
 
   updateInput = e => {
     this.setState({
@@ -88,12 +50,16 @@ class Profile extends Component {
 
   handleSubmit = () => {
     this.props.updateProfile(this.state);
+    //when region is changed, the sourceDbServer should be changed accordingly
+    if(this.state.region !== this.props.profile.region){
+      this.props.changeServer(this.state.region);
+    }
+
     this.props.history.push('/');
   }
 
 
   render() {
-    if(!this.props.profile.isEmpty) {
       return (
           <div className="animated fadeIn mt-3">
             <Row>
@@ -153,7 +119,6 @@ class Profile extends Component {
                                 <option value=""></option>
                                 <option value="Canada">Canada</option>
                                 <option value="Asia">Asia</option>
-                                <option value="Asia">Other</option>
                               </Input>
                             </FormGroup>
                           </Col>
@@ -162,8 +127,7 @@ class Profile extends Component {
                     </FormGroup>
                   </CardBody>
                   <CardFooter>
-                    <Button type="submit" color="primary" className="mr-2" onClick={this.handleSubmit}><i
-                        className="fa fa-dot-circle-o"></i> Submit</Button>
+                    <Button type="submit" color="primary" className="mr-2" onClick={this.handleSubmit}><i className="fa fa-dot-circle-o"></i> Submit</Button>
                     <Button type="reset" color="danger"><i className="fa fa-ban"></i> Reset</Button>
                   </CardFooter>
                 </Card>
@@ -171,11 +135,6 @@ class Profile extends Component {
             </Row>
           </div>
       );
-    }else{
-      return (
-          <div className="animated fadeIn pt-1 text-center">Loading profile...</div>
-      );
-    }
   }
 }
 
@@ -190,7 +149,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateProfile: (newProfile) => dispatch(updateProfile(newProfile))
+    updateProfile: (newProfile) => dispatch(updateProfile(newProfile)),
+    changeServer: (region) => dispatch(changeServer(region))
   }
 }
 

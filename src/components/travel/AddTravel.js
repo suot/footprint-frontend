@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Button, Card, CardBody, CardFooter, CardHeader, Col, FormGroup, Form, Input, Label, Row, InputGroup } from 'reactstrap';
 import { connect } from 'react-redux'
-import { getFirestore } from 'redux-firestore'
+//import { getFirestore } from 'redux-firestore'
 import { addTravel } from '../../store/actions/travelActions'
-import Map from './Map';
-import CityInput from './CityInput'
-import DatesRange from "./DatesRange";
-import StarRating from "./StarRating";
+import Map from '../utils/Map';
+import CityInput from '../utils/CityInput'
+import DatesRange from "../utils/DatesRange";
+import StarRating from "../utils/StarRating";
 
 
 class AddTravel extends Component {
@@ -35,7 +35,7 @@ class AddTravel extends Component {
                 travelType: travelType
             }
 
-            this.props.addTravel(travelRecord, this.props.auth.uid, this.props.profile.region);
+            this.props.addTravel(travelRecord, this.props.auth.uid);
             this.props.history.push('/');
         }
     }
@@ -89,7 +89,7 @@ class AddTravel extends Component {
                                             </FormGroup>
 
                                             <FormGroup row className="ml-1">
-                                                <Label className="mr-2">Rating the city</Label>
+                                                <Label className="mr-4">Rate the city</Label>
                                                 <StarRating />
                                             </FormGroup>
                                         </Col>
@@ -100,7 +100,6 @@ class AddTravel extends Component {
                                 </CardBody>
                                 <CardFooter>
                                     <Button type="button" color="primary" className="mr-2" onClick={this.addTravel}><i className="fa fa-dot-circle-o"></i> Add the record</Button>
-                                    {/*<Button type="reset" color="danger"><i className="fa fa-ban"></i> Reset</Button>*/}
                                 </CardFooter>
                             </Card>
                         </Col>
@@ -114,15 +113,14 @@ class AddTravel extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        travel: state.travel,
+        travel: state.travel.newTravel,
         auth: state.firebase.auth,
-        profile: state.firebase.profile,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addTravel: (travelRecord, uid, region) => dispatch(addTravel(travelRecord, uid, region))
+        addTravel: (travelRecord, uid) => dispatch(addTravel(travelRecord, uid))
     }
 }
 

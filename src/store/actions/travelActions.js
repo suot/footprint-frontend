@@ -2,38 +2,64 @@ import axios from 'axios'
 
 
 export const addCity = (city) => {
-    return (dispatch, getState, { getFirebase, getFirestore }) => {
+    return (dispatch) => {
         dispatch({ type: 'ADD_CITY', city });
     }
 }
 
 export const addFootprint = (footprint) => {
-    return (dispatch, getState, { getFirebase, getFirestore }) => {
+    return (dispatch) => {
         dispatch({ type: 'ADD_FOOTPRINT', footprint });
     }
 }
 
 export const deleteFootprint = (footprint) => {
-    return (dispatch, getState, { getFirebase, getFirestore }) => {
+    return (dispatch) => {
         dispatch({ type: 'DELETE_FOOTPRINT', footprint });
     }
 }
 
 export const addTravelTime = (startDate, endDate) => {
-    return (dispatch, getState, { getFirebase, getFirestore }) => {
+    return (dispatch) => {
         dispatch({ type: 'ADD_TRAVEL_TIME', startDate, endDate });
     }
 }
 
 export const addRating = (rating) => {
-    return (dispatch, getState, { getFirebase, getFirestore }) => {
+    return (dispatch) => {
         dispatch({ type: 'ADD_TRAVEL_RATING', rating });
     }
 }
 
-export const addTravel = (travelRecord, uid, region) => {
-    return (dispatch, getState, { getFirebase, getFirestore }) => {
-        //console.log(travelRecord);
+
+export const addTravel = (travelRecord, uid) => {
+    return (dispatch, getState) => {
+        let sourceDbServer = getState().travel.sourceDbServer;
+
+        axios.post(sourceDbServer + '/travel', {
+            uid: uid,
+            travelRecord: travelRecord
+        }).then(function (newTravel) {
+            const travel = newTravel.data;
+            dispatch({ type: 'ADD_TRAVEL', travel });
+        }).catch(function (error) { console.log(error); });
+    }
+}
+
+export const deleteTravel = (travelId, rating) => {
+    return (dispatch, getState) => {
+        let sourceDbServer = getState().travel.sourceDbServer;
+
+        axios.delete(sourceDbServer + '/travel', { _id: travelId, rating: rating }).then(function (removedTravel) {
+            const _id = removedTravel.data._id;
+            dispatch({ type: 'DELETE_TRAVEL', _id });
+        }).catch(function (error) { console.log(error); });
+    }
+}
+
+export const getTravelList = (uid) => {
+    return (dispatch, getState) => {
+
 
         // axios.get('http://localhost:3001/travel?userId=a11')
         //     .then(function (response) {
@@ -42,31 +68,11 @@ export const addTravel = (travelRecord, uid, region) => {
         //     .catch(function (error) {
         //         console.log(error);
         //     });
+    }
+}
 
-        let port;
-        if(region === 'Canada'){
-            port = '3001'; //server1_Canada
-        }else{
-            port = '3002'; //server2_Asia
-        }
-
-        axios.post('http://localhost:' + port + '/city', travelRecord.city)
-            .then(function (newCity) {
-                axios.post('http://localhost:' + port + '/travel', {
-                    userId: uid,
-                    cityId: newCity.data._id,
-                    startDate: travelRecord.startDate,
-                    endDate: travelRecord.endDate,
-                    travelType: travelRecord.travelType,
-                    cost: travelRecord.cost,
-                    rating: travelRecord.rating,
-                    footprints: travelRecord.footprints
-                }).then(function (newTravel) {
-                    console.log(newTravel);
-                    const _id = newTravel.data._id;
-                    dispatch({ type: 'ADD_TRAVEL', _id, region });
-                }).catch(function (error) { console.log(error); });
-            }).catch(function (error) { console.log(error); });
-
+export const changeServer = (region) => {
+    return (dispatch) => {
+        dispatch({ type: 'CHANGE_SERVER', region });
     }
 }
