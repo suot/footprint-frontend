@@ -61,6 +61,7 @@ class Map_AddTravel extends React.Component {
         map_AddTravel.on('click', function(e) {
             //console.log(e.latlng);
             const marker = L.marker(e.latlng, {icon: markerIcon}).addTo(map_AddTravel);
+            console.log(marker.getLayerId);
             addFootprint(e.latlng);
             //marker.bindPopup("<b>Hello world!</b><br>");
             //marker.bindTooltip('Lat: ' + e.latlng.lat + '<br>Lng: '+e.latlng.lng);

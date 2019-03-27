@@ -72,6 +72,12 @@ export const getTravelList = (uid) => {
     }
 }
 
+export const changeMapCenter_TravelList = (latlng) => {
+    return (dispatch) => {
+        dispatch({ type: 'CHANGE_MAPCENTER_TRAVELLIST', latlng });
+    }
+}
+
 export const changeServer = (region) => {
     return (dispatch) => {
         dispatch({ type: 'CHANGE_SERVER', region });

@@ -47,7 +47,7 @@ class AddTravel extends Component {
                 travelType: travelType
             }
             this.props.addTravel(travelRecord, this.props.auth.uid);
-            this.props.history.push('/');
+            this.props.history.push('/travel/list');
         }
     }
 

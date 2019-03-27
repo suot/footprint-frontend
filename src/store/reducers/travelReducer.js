@@ -15,6 +15,9 @@ const initState = {
         footprints: [],
     },
     travelList: null,
+    lastAddedTravel: null,
+    lastDeletedTravel: null,
+    travelListMapCenter: null,
     sourceDbServer: null,
 }
 
@@ -66,16 +69,25 @@ const travelReducer = (state = initState, action) => {
                 footprints: []
             }
 
+            state.travelList.push(action.travel);
+            state.lastAddedTravel = action.travel;
+
             return state;
         }
         case 'DELETE_TRAVEL':{
             console.log('Deleted the travel record: ', action.travel);
+            state.lastDeletedTravel = state.travelList.find(travel => travel._id === action.travel._id);
             state.travelList = state.travelList.filter(travel => travel._id !== action.travel._id);
             return state;
         }
         case 'GET_TRAVEL_LIST':{
-            console.log('Travel list of user ' + action.userId + ': ', action.travelList);
+            console.log('Get travel list of user ' + action.userId + ': ', action.travelList);
             state.travelList = action.travelList;
+            return state;
+        }
+        case 'CHANGE_MAPCENTER_TRAVELLIST':{
+            console.log('Changed the center of travel list map to ', action.latlng);
+            state.travelListMapCenter = action.latlng;
             return state;
         }
         case 'CHANGE_SERVER':{
