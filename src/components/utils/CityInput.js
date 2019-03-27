@@ -50,8 +50,10 @@ class CityInput extends React.Component {
             let newCity = {
                 name: city[0],
                 country: city[1],
-                lat: Number.parseFloat(city[2]),
-                lng: Number.parseFloat(city[3])
+                latlng:{
+                    lat: Number.parseFloat(city[2]),
+                    lng: Number.parseFloat(city[3])
+                }
             };
 
             this.props.addCity(newCity);

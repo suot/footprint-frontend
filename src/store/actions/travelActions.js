@@ -32,13 +32,13 @@ export const addRating = (rating) => {
 }
 
 
-export const addTravel = (travelRecord, uid) => {
+export const addTravel = (travel, uid) => {
     return (dispatch, getState) => {
         let sourceDbServer = getState().travel.sourceDbServer;
 
         axios.post(sourceDbServer + '/travel', {
-            uid: uid,
-            travelRecord: travelRecord
+            userId: uid,
+            travel: travel
         }).then(function (newTravel) {
             const travel = newTravel.data;
             dispatch({ type: 'ADD_TRAVEL', travel });
@@ -46,28 +46,29 @@ export const addTravel = (travelRecord, uid) => {
     }
 }
 
-export const deleteTravel = (travelId, rating) => {
+export const deleteTravel = (travelId, uid) => {
     return (dispatch, getState) => {
         let sourceDbServer = getState().travel.sourceDbServer;
 
-        axios.delete(sourceDbServer + '/travel', { _id: travelId, rating: rating }).then(function (removedTravel) {
-            const _id = removedTravel.data._id;
-            dispatch({ type: 'DELETE_TRAVEL', _id });
+        axios.delete(sourceDbServer + '/travel', {params: { _id: travelId }}).then(function (removedTravel) {
+            const travel = removedTravel.data;
+            dispatch({ type: 'DELETE_TRAVEL', travel });
         }).catch(function (error) { console.log(error); });
     }
 }
 
 export const getTravelList = (uid) => {
     return (dispatch, getState) => {
-
-
-        // axios.get('http://localhost:3001/travel?userId=a11')
-        //     .then(function (response) {
-        //         console.log(response);
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     });
+        let request = getState().travel.sourceDbServer + '/travel?userId=' + uid;
+        axios.get(request)
+            .then(function (response) {
+                const travelList = response.data;
+                const userId = uid;
+                dispatch({ type: 'GET_TRAVEL_LIST', userId, travelList });
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 }
 

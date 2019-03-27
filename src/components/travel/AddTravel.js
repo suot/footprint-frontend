@@ -3,7 +3,7 @@ import { Button, Card, CardBody, CardFooter, CardHeader, Col, FormGroup, Form, I
 import { connect } from 'react-redux'
 //import { getFirestore } from 'redux-firestore'
 import { addTravel } from '../../store/actions/travelActions'
-import Map from '../utils/Map';
+import Map_AddTravel from '../utils/Map_AddTravel';
 import CityInput from '../utils/CityInput'
 import DatesRange from "../utils/DatesRange";
 import StarRating from "../utils/StarRating";
@@ -23,18 +23,29 @@ class AddTravel extends Component {
         e.preventDefault();
 
         //console.log(this.props.profile);
-        const {city, startDate, endDate, rating} = this.props.travel;
-        const cost = Number.parseFloat(this.state.cost.trim());
+        const {city, startDate, endDate, rating, footprints} = this.props.travel;
+
+        let cost = this.state.cost;
         const travelType = this.state.travelType;
-        if(cost===null || cost.isNaN || travelType===null || travelType==="" || city.name===null || city.country===null || city.lat===null || city.lng===null || startDate===null || endDate===null || rating===null ){
-            alert("Please complete all information");
+
+        if(city.name===null || city.country===null || city.latlng.lat===null || city.latlng.lng===null){
+            alert("Please input a city");
+        }else if(startDate===null || endDate===null){
+            alert("Please select a travel temporal");
+        }else if(cost===null || Number.parseFloat(cost.trim()).isNaN){
+            alert("Please input a valid cost number");
+        }else if(travelType===null || travelType===""){
+            alert("Please select a travel type");
+        }else if(rating===null || rating===0){
+            alert("The minimum rating value should be 1");
+        }else if(footprints.length === 0){
+            alert("Please click on the map to add footprints");
         }else{
             const travelRecord = {
                 ...this.props.travel,
                 cost: cost,
                 travelType: travelType
             }
-
             this.props.addTravel(travelRecord, this.props.auth.uid);
             this.props.history.push('/');
         }
@@ -63,13 +74,13 @@ class AddTravel extends Component {
                                     <Row>
                                         <Col xs="3" md="3">
                                             <FormGroup row className="ml-1">
-                                                <Label className="mr-2">City</Label>
-                                                <CityInput />
+                                                <Label htmlFor="time">Travel time</Label>
+                                                <DatesRange/>
                                             </FormGroup>
 
                                             <FormGroup row className="ml-1">
-                                                <Label htmlFor="time">Travel time</Label>
-                                                <DatesRange/>
+                                                <Label className="mr-2">City</Label>
+                                                <CityInput />
                                             </FormGroup>
 
                                             <FormGroup row className="ml-1">
@@ -94,7 +105,7 @@ class AddTravel extends Component {
                                             </FormGroup>
                                         </Col>
                                         <Col xs="9" md="9">
-                                            <Map/>
+                                            <Map_AddTravel/>
                                         </Col>
                                     </Row>
                                 </CardBody>

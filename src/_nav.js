@@ -34,7 +34,7 @@ export default {
           icon: 'icon-drop',
         },
         {
-          name: 'List your travels',
+          name: 'List travel records',
           url: '/travel/list',
           icon: 'icon-puzzle',
         },

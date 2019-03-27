@@ -7,7 +7,7 @@ const TravelList = React.lazy(() => import('./components/travel/TravelList'));
 // const FootprintDetails = React.lazy(() => import('./components/footprints/FootprintDetails'));
 const Notfound = React.lazy(() => import('./components/auth/Notfound'));
 const Notifications = React.lazy(() => import('./components/dashboard/Notifications'));
-const Map = React.lazy(() => import('./components/utils/Map'));
+const Map = React.lazy(() => import('./components/utils/Map_AddTravel'));
 
 
 const routes = [

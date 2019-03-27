@@ -4,8 +4,10 @@ const initState = {
         city: {
             name: null,
             country: null,
-            lat: null,
-            lng: null
+            latlng: {
+                lat: null,
+                lng: null
+            }
         },
         startDate: null,
         endDate: null,
@@ -47,11 +49,33 @@ const travelReducer = (state = initState, action) => {
             return state;
         }
         case 'ADD_TRAVEL':{
-            console.log('Added a new travel record to MongoDB ' + state.sourceDbServer + ' : ', action.travel);
+            console.log('Added a new travel record: ', action.travel);
+
+            state.newTravel = {
+                city: {
+                    name: null,
+                    country: null,
+                    latlng:{
+                        lat: null,
+                        lng: null
+                    }
+                },
+                startDate: null,
+                endDate: null,
+                rating: null,
+                footprints: []
+            }
+
             return state;
         }
         case 'DELETE_TRAVEL':{
-            console.log('Deleted the travel record: ' + action._id + ' from MongoDB: ' + state.sourceDbServer);
+            console.log('Deleted the travel record: ', action.travel);
+            state.travelList = state.travelList.filter(travel => travel._id !== action.travel._id);
+            return state;
+        }
+        case 'GET_TRAVEL_LIST':{
+            console.log('Travel list of user ' + action.userId + ': ', action.travelList);
+            state.travelList = action.travelList;
             return state;
         }
         case 'CHANGE_SERVER':{

@@ -2,9 +2,7 @@ import React from 'react'
 import {connect} from "react-redux";
 import {addTravelTime} from "../../store/actions/travelActions";
 import DateRangePicker from '@wojtekmaj/react-daterange-picker';
-
 import '../../assets/DateRangePicker.scss';
-
 
 class DatesRange extends React.Component {
     state = {
