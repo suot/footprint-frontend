@@ -1,15 +1,13 @@
 import React from 'react';
+import {connect} from "react-redux";
+import styled from 'styled-components';
+
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-
 import 'leaflet-control-geocoder';
 import 'leaflet-control-geocoder/dist/Control.Geocoder.css';
-
-import LMC from 'leaflet.markercluster';
+import 'leaflet.markercluster';
 import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
-
-import styled from 'styled-components';
-import {connect} from "react-redux";
 
 
 const Wrapper = styled.div`
@@ -31,14 +29,14 @@ class Map_AddTravel extends React.Component {
         }
 
         if (this.props.travelListMapCenter !== prevProps.travelListMapCenter) {
-            map_TravelList.panTo([this.props.travelListMapCenter.lat, this.props.travelListMapCenter.lng]);
+            map_TravelList.flyTo(this.props.travelListMapCenter, 9, { animate: true, duration: 5.0 });
         }
     }
 
     componentDidMount(){
         map_TravelList = L.map('map2', {
             center: [39.9, 116.4],
-            zoom: 10
+            zoom: 9
         });
 
         //OpenStreetMap tileLayer
@@ -87,7 +85,7 @@ class Map_AddTravel extends React.Component {
 
         this.props.travelList && this.props.travelList.map(travel => {
             let footprints = travel.footprints;
-            let layerGroup = new L.layerGroup();
+            let layerGroup = L.markerClusterGroup();
             footprints && footprints.map(footprint=>{
                 layerGroup.addLayer(L.marker(footprint, {icon: markerIcon}));
             })
@@ -102,7 +100,7 @@ class Map_AddTravel extends React.Component {
             iconUrl: '/assets/redMarker.png',
             iconSize: [15, 25],
         });
-        let layerGroup = new L.layerGroup();
+        let layerGroup = L.markerClusterGroup();
         travel.footprints && travel.footprints.map(footprint=>{
             layerGroup.addLayer(L.marker(footprint, {icon: markerIcon}));
         })
