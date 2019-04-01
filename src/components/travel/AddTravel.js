@@ -68,7 +68,7 @@ class AddTravel extends Component {
                         <Col xs="12" md="12">
                             <Card>
                                 <CardHeader>
-                                    <strong>Record a travel</strong>
+                                    <i className="icon-pencil"></i><strong>Record a travel and mark your footprints there</strong>
                                 </CardHeader>
                                 <CardBody>
                                     <Row>
@@ -93,7 +93,7 @@ class AddTravel extends Component {
                                                 <Input type="select" id="travelType" onChange={this.updateInput}>
                                                     <option value=""></option>
                                                     <option value="Metropolis">Metropolis</option>
-                                                    <option value="Island">Island/Sea</option>
+                                                    <option value="Sea">Island/Sea</option>
                                                     <option value="Mountain">Mountain/Lake</option>
                                                     <option value="History">Historic sites</option>
                                                 </Input>

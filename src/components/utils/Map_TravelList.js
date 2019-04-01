@@ -17,7 +17,7 @@ const Wrapper = styled.div`
 
 let map_TravelList;
 
-class Map_AddTravel extends React.Component {
+class Map_TravelList extends React.Component {
     componentDidUpdate(prevProps) {
         //when adding a travel record, add its footprints on to the map. When deleting a travel record, delete its footprints from the map.
         if(this.props.lastAddedTravel !== prevProps.lastAddedTravel){
@@ -54,7 +54,7 @@ class Map_AddTravel extends React.Component {
         // }).addTo(map_TravelList);
 
         //Search a city
-        L.Control.geocoder().addTo(map_TravelList);
+        //L.Control.geocoder().addTo(map_TravelList);
 
         this.renderAllFootprintsOnMap();
 
@@ -136,4 +136,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Map_AddTravel);
+export default connect(mapStateToProps)(Map_TravelList);

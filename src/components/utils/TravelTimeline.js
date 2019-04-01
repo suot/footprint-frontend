@@ -22,17 +22,18 @@ class TravelTimeline extends React.Component {
             const _id = travel._id;
             const temporal = moment(travel.startDate).format('L') + " to " + moment(travel.endDate).format('L');
             const latlng = travel.city.latlng;
+            const tooltip = "Fly to your footprints in " + city;
 
             timelines.push(
                 <TimelineEvent
                     title={city}
-                    buttons={ <a href='' style={{ color: '#01579B' }} onClick = { (e, id) => this.deleteHandler(e, _id)} title='Press to delete this record'>delete</a> }
+                    buttons={ <a href='' style={{ color: '#01579B' }} onClick = { (e, id) => this.deleteHandler(e, _id)} title='Click to delete this record'>delete</a> }
                     createdAt={temporal}
-                    icon={<i className='cui-calendar' onClick={ e => this.footprintsHandler(e, latlng)} title='Go to footprints'></i>}
+                    icon={<i className='cui-calendar' onClick={ e => this.footprintsHandler(e, latlng)} title={tooltip}></i>}
                     container='card'
                     style={{ border: '1px solid #777', borderRadius: 3, fontWeight: 400, width: '200px' }}
                     cardHeaderStyle={{ backgroundColor: '#8bc34a', color: '#503331' }}
-                    onClick={ e => this.footprintsHandler(e, latlng)}
+                    // onClick={ e => this.footprintsHandler(e, latlng)}
                     key={_id}
                 />
             )

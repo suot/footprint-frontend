@@ -24,21 +24,50 @@ export default {
     //   icon: 'icon-drop',
     // },
     {
-      name: 'Travel',
+      name: 'Footprint',
       url: '/travel',
-      icon: 'icon-speedometer',
+      icon: 'icon-location-pin',
+      class: 'large',
       children: [
         {
-          name: 'Record a travel',
+          name: 'Mark your footprints',
           url: '/travel/add',
-          icon: 'icon-drop',
+          //icon: 'icon-pencil',
+          class: 'medium',
         },
         {
-          name: 'List travel records',
+          name: 'List your footprints',
           url: '/travel/list',
-          icon: 'icon-puzzle',
+          //icon: 'icon-list',
+          class: 'medium',
         },
       ],
+    },
+    {
+      name: 'Destination',
+      url: '/destination',
+      icon: 'icon-globe',
+      class: 'large',
+      children: [
+        {
+          name: 'The top cities',
+          url: '/destination/cityList',
+          //icon: 'icon-badge',
+          class: 'medium',
+        },
+        {
+          name: 'Your next trip',
+          url: '/destination/recommendations',
+          //icon: 'icon-map',
+          class: 'medium',
+        },
+      ],
+    },
+    {
+      name: 'Warehouse',
+      url: '/warehouse',
+      icon: 'icon-home',
+      class: 'large'
     },
   ],
 };

@@ -42,17 +42,13 @@ class DefaultHeader extends Component {
               
             <DropdownMenu right style={{ right: 'auto' }}>
               <DropdownItem header tag="div" className="text-center"><strong>Profile</strong></DropdownItem>
-
               <DropdownItem>
                   <NavLink href="/profile">
                       <i className="fa fa-bell-o"></i> Edit Profile
                   </NavLink>
               </DropdownItem>
-
               <DropdownItem><i className="fa fa-envelope-o"></i> Change Password</DropdownItem>
-
               <DropdownItem header tag="div" className="text-center"><strong>Settings</strong></DropdownItem>
-
               <DropdownItem onClick={this.props.logout} ><i className="fa fa-lock"></i> Logout</DropdownItem>
             </DropdownMenu>
           </AppHeaderDropdown>

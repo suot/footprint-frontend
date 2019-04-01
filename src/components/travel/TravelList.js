@@ -34,7 +34,7 @@ class TravelList extends Component {
                             <Col xs="12" md="12">
                                 <Card>
                                     <CardHeader>
-                                        <strong>Your travel records</strong>
+                                        <i className="icon-map"></i><strong>Your travel records and footprints</strong>
                                     </CardHeader>
                                     <CardBody>
                                         <Row>

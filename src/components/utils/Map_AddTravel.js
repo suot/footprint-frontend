@@ -1,16 +1,12 @@
 import React from 'react';
-import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
-
-import 'leaflet-control-geocoder';
-import 'leaflet-control-geocoder/dist/Control.Geocoder.css';
-
-import LMC from 'leaflet.markercluster';
-import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
-
-import styled from 'styled-components';
 import {connect} from "react-redux";
 import {addFootprint, deleteFootprint} from "../../store/actions/travelActions";
+import styled from 'styled-components';
+
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet-control-geocoder';
+import 'leaflet-control-geocoder/dist/Control.Geocoder.css';
 
 
 const Wrapper = styled.div`
@@ -24,7 +20,7 @@ class Map_AddTravel extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (this.props.latlng !== prevProps.latlng) {
-            map_AddTravel.panTo([this.props.latlng.lat, this.props.latlng.lng]);
+            map_AddTravel.panTo(this.props.latlng);
         }
     }
 
