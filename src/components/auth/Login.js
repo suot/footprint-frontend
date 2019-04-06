@@ -20,16 +20,16 @@ class Login extends Component {
     this.setState({
       [e.target.id]: e.target.value
     });
-  }
+  };
 
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.login(this.state);
-  }
+  };
 
   render() {
-    const { authError, auth } = this.props;
-    if(auth.uid) return <Redirect to='/' />
+    const { auth } = this.props;
+    if(auth.uid) return <Redirect to='/' />;
 
     return (
       <div className="app flex-row align-items-center">
@@ -43,7 +43,7 @@ class Login extends Component {
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
-                          <i className="icon-user"></i>
+                          <i className="icon-user" />
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input type="text" placeholder="Email" autoComplete="email" id={"email"} onChange={this.updateInput} />
@@ -51,7 +51,7 @@ class Login extends Component {
                     <InputGroup className="mb-4">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
-                          <i className="icon-lock"></i>
+                          <i className="icon-lock" />
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input type="password" placeholder="Password" autoComplete="current-password" id={"password"} onChange={this.updateInput} />
@@ -88,7 +88,7 @@ const mapStateToProps = (state) => {
     authError: state.auth.authError,
     auth: state.firebase.auth,
   }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -105,7 +105,6 @@ const mapDispatchToProps = (dispatch) => {
       // }
 
   }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
-//export default connect(null, mapDispatchToProps)(Login);

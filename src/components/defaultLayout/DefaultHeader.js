@@ -4,8 +4,7 @@ import { AppHeaderDropdown, AppNavbarBrand, AppSidebarToggler } from '@coreui/re
 import logo from '../../assets/img/footprint.png'
 import miniLogo from '../../assets/img/footprint_mini.png'
 import { connect } from 'react-redux'
-import firebase from 'firebase/app';
-import { signOut } from '../../store/actions/authActions'
+import { signOut } from '../../store/actions/travelActions'
 import { Avatar } from '@material-ui/core';
 
 
@@ -25,11 +24,11 @@ class DefaultHeader extends Component {
 
         <Nav className="ml-auto" navbar>
           <NavItem className="d-md-down-none">
-            <NavLink href="/notifications"><i className="icon-bell"></i><Badge pill color="danger">5</Badge></NavLink>
+            <NavLink href="/notifications"><i className="icon-bell"/><Badge pill color="danger">5</Badge></NavLink>
           </NavItem>
 
           <NavItem className="d-md-down-none">
-            <NavLink href="#"><i className="icon-location-pin"></i></NavLink>
+            <NavLink href="#"><i className="icon-location-pin"/></NavLink>
           </NavItem>
 
           <AppHeaderDropdown direction="down" className="mr-4">
@@ -44,12 +43,12 @@ class DefaultHeader extends Component {
               <DropdownItem header tag="div" className="text-center"><strong>Profile</strong></DropdownItem>
               <DropdownItem>
                   <NavLink href="/profile">
-                      <i className="fa fa-bell-o"></i> Edit Profile
+                      <i className="fa fa-bell-o"/> Edit Profile
                   </NavLink>
               </DropdownItem>
-              <DropdownItem><i className="fa fa-envelope-o"></i> Change Password</DropdownItem>
+              <DropdownItem><i className="fa fa-envelope-o"/> Change Password</DropdownItem>
               <DropdownItem header tag="div" className="text-center"><strong>Settings</strong></DropdownItem>
-              <DropdownItem onClick={this.props.logout} ><i className="fa fa-lock"></i> Logout</DropdownItem>
+              <DropdownItem onClick={this.props.logout} ><i className="fa fa-lock"/> Logout</DropdownItem>
             </DropdownMenu>
           </AppHeaderDropdown>
         </Nav>
@@ -64,7 +63,7 @@ const mapStateToProps = (state) => {
         auth: state.firebase.auth,
         profile: state.firebase.profile,
     }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -79,6 +78,6 @@ const mapDispatchToProps = (dispatch) => {
         // }
 
     }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(DefaultHeader);

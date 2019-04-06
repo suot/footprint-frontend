@@ -19,24 +19,32 @@ let map_TravelList;
 
 class Map_TravelList extends React.Component {
     componentDidUpdate(prevProps) {
-        //when adding a travel record, add its footprints on to the map. When deleting a travel record, delete its footprints from the map.
-        if(this.props.lastAddedTravel !== prevProps.lastAddedTravel){
-            this.addFootprintsOnMap(this.props.lastAddedTravel);
-        }
+        if(this.props.travelList){
+            if(prevProps.travelList){
+                //when adding a travel record, add its footprints on to the map. When deleting a travel record, delete its footprints from the map.
+                if(this.props.lastAddedTravel !== prevProps.lastAddedTravel){
+                    this.addFootprintsOnMap(this.props.lastAddedTravel);
+                }
 
-        if(this.props.lastDeletedTravel !== prevProps.lastDeletedTravel){
-            this.DeleteFootprintsFromMap(this.props.lastDeletedTravel);
-        }
+                if(this.props.lastDeletedTravel !== prevProps.lastDeletedTravel){
+                    this.DeleteFootprintsFromMap(this.props.lastDeletedTravel);
+                }
 
-        if (this.props.travelListMapCenter !== prevProps.travelListMapCenter) {
-            map_TravelList.flyTo(this.props.travelListMapCenter, 9, { animate: true, duration: 5.0 });
+                if (this.props.travelListMapCenter !== prevProps.travelListMapCenter) {
+                    map_TravelList.flyTo(this.props.travelListMapCenter, 9, { animate: true, duration: 5.0 });
+                }
+            }else{
+                //when getTravelList returns back with value, including empty list []
+                this.renderAllFootprintsOnMap();
+            }
+
         }
     }
 
     componentDidMount(){
-        map_TravelList = L.map('map2', {
-            center: [39.9, 116.4],
-            zoom: 9
+        map_TravelList = L.map('map3', {
+            center: [18, 16],
+            zoom: 2
         });
 
         //OpenStreetMap tileLayer
@@ -53,28 +61,7 @@ class Map_TravelList extends React.Component {
         //     attribution: 'Tile Layer &copy; <a href="https://www.google.com/maps">Google Maps</a>'
         // }).addTo(map_TravelList);
 
-        //Search a city
-        //L.Control.geocoder().addTo(map_TravelList);
-
         this.renderAllFootprintsOnMap();
-
-        // const markers = L.markerClusterGroup();
-        // markers.addLayer(L.marker(getRandomLatLng(map_TravelList)));
-        // map_TravelList.addLayer(markers);
-        // const polygon = L.polygon([
-        //     [51.509, -0.08],
-        //     [51.503, -0.06],
-        //     [51.51, -0.047]
-        // ]).addTo(map_TravelList);
-        // polygon.bindPopup("I am a polygon.");
-        //
-        // const circle = L.circle([51.508, -0.11], {
-        //     color: 'red',
-        //     fillColor: '#f03',
-        //     fillOpacity: 0.5,
-        //     radius: 500
-        // }).addTo(map_TravelList);
-        // circle.bindPopup("I am a circle.");
     }
 
     renderAllFootprintsOnMap(){
@@ -87,11 +74,11 @@ class Map_TravelList extends React.Component {
             let footprints = travel.footprints;
             let layerGroup = L.markerClusterGroup();
             footprints && footprints.map(footprint=>{
-                layerGroup.addLayer(L.marker(footprint, {icon: markerIcon}));
-            })
+                return layerGroup.addLayer(L.marker(footprint, {icon: markerIcon}));
+            });
             //id is used to find that layerGroup and delete it including all its markers.
             layerGroup.id = travel._id;
-            layerGroup.addTo(map_TravelList);
+            return layerGroup.addTo(map_TravelList);
         });
     }
 
@@ -102,8 +89,8 @@ class Map_TravelList extends React.Component {
         });
         let layerGroup = L.markerClusterGroup();
         travel.footprints && travel.footprints.map(footprint=>{
-            layerGroup.addLayer(L.marker(footprint, {icon: markerIcon}));
-        })
+            return layerGroup.addLayer(L.marker(footprint, {icon: markerIcon}));
+        });
         layerGroup.id = travel._id;
         layerGroup.addTo(map_TravelList);
     }
@@ -119,7 +106,7 @@ class Map_TravelList extends React.Component {
 
     render() {
         return (
-            <Wrapper width='100%' height='450px' id={'map2'} />
+            <Wrapper width='100%' height='450px' id={'map3'} />
             // <Wrapper width={'900px'} height={'480px'} id={'map1'} />
         )
     }
@@ -134,6 +121,6 @@ const mapStateToProps = (state) => {
         lastDeletedTravel: state.travel.lastDeletedTravel,
         travelListMapCenter: state.travel.travelListMapCenter
     }
-}
+};
 
 export default connect(mapStateToProps)(Map_TravelList);

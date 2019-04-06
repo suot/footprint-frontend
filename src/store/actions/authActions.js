@@ -1,6 +1,6 @@
 
 export const signIn = (credentials) => {
-    return (dispatch, getState, {getFirebase, getFirestore}) => {
+    return (dispatch, getState, {getFirebase}) => {
         const firebase = getFirebase();
         
         firebase.auth().signInWithEmailAndPassword(
@@ -12,18 +12,8 @@ export const signIn = (credentials) => {
             dispatch({ type: 'LOGIN_ERROR', err })
         });
     }
-}
+};
 
-export const signOut = () => {
-    return (dispatch, getState, {getFirebase, getFirestore}) => {
-        const firebase = getFirebase();
-        firebase.auth().signOut().then(() => {
-            dispatch({ type: 'LOGOUT_SUCCESS' })
-        }).catch((err) => {
-            dispatch({ type: 'LOGOUT_ERROR', err })
-        });
-    }
-}
 
 export const signUp = (newUser) => {
     return (dispatch, getState, {getFirebase, getFirestore}) => {
@@ -47,7 +37,7 @@ export const signUp = (newUser) => {
             dispatch({ type: 'SIGNUP_ERROR', err})
         })
     }
-}
+};
 
 
 export const updateProfile = (newProfile) => {
@@ -67,4 +57,4 @@ export const updateProfile = (newProfile) => {
             dispatch({ type: 'PROFILE_UPDATE_ERROR', err})
         })
     }
-}
+};

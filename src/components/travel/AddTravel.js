@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Button, Card, CardBody, CardFooter, CardHeader, Col, FormGroup, Form, Input, Label, Row, InputGroup } from 'reactstrap';
+import { Button, Card, CardBody, CardFooter, CardHeader, Col, FormGroup, Form, Input, Label, Row } from 'reactstrap';
 import { connect } from 'react-redux'
-//import { getFirestore } from 'redux-firestore'
 import { addTravel } from '../../store/actions/travelActions'
-import Map_AddTravel from '../utils/Map_AddTravel';
+import MapAddTravel from '../utils/map/Map_AddTravel';
 import CityInput from '../utils/CityInput'
 import DatesRange from "../utils/DatesRange";
 import StarRating from "../utils/StarRating";
@@ -22,7 +21,7 @@ class AddTravel extends Component {
     addTravel = (e) => {
         e.preventDefault();
 
-        //console.log(this.props.profile);
+        console.log(this.props.travel);
         const {city, startDate, endDate, rating, footprints} = this.props.travel;
 
         let cost = this.state.cost;
@@ -45,11 +44,11 @@ class AddTravel extends Component {
                 ...this.props.travel,
                 cost: cost,
                 travelType: travelType
-            }
+            };
             this.props.addTravel(travelRecord, this.props.auth.uid);
             this.props.history.push('/travel/list');
         }
-    }
+    };
 
 
     updateInput = (e) => {
@@ -58,7 +57,7 @@ class AddTravel extends Component {
             [e.target.id]: e.target.value
         });
 
-    }
+    };
 
     render() {
         return (
@@ -68,7 +67,7 @@ class AddTravel extends Component {
                         <Col xs="12" md="12">
                             <Card>
                                 <CardHeader>
-                                    <i className="icon-pencil"></i><strong>Record a travel and mark your footprints there</strong>
+                                    <i className="icon-pencil"/><strong>Record a travel and mark your footprints there</strong>
                                 </CardHeader>
                                 <CardBody>
                                     <Row>
@@ -91,7 +90,7 @@ class AddTravel extends Component {
                                             <FormGroup row className="ml-1">
                                                 <Label htmlFor="travelType">Travel type</Label>
                                                 <Input type="select" id="travelType" onChange={this.updateInput}>
-                                                    <option value=""></option>
+                                                    <option value=""/>
                                                     <option value="Metropolis">Metropolis</option>
                                                     <option value="Sea">Island/Sea</option>
                                                     <option value="Mountain">Mountain/Lake</option>
@@ -105,12 +104,12 @@ class AddTravel extends Component {
                                             </FormGroup>
                                         </Col>
                                         <Col xs="9" md="9">
-                                            <Map_AddTravel/>
+                                            <MapAddTravel/>
                                         </Col>
                                     </Row>
                                 </CardBody>
                                 <CardFooter>
-                                    <Button type="button" color="primary" className="mr-2" onClick={this.addTravel}><i className="fa fa-dot-circle-o"></i> Add the record</Button>
+                                    <Button type="button" color="primary" className="mr-2" onClick={this.addTravel}><i className="fa fa-dot-circle-o"/> Add the record</Button>
                                 </CardFooter>
                             </Card>
                         </Col>
@@ -127,12 +126,12 @@ const mapStateToProps = (state) => {
         travel: state.travel.newTravel,
         auth: state.firebase.auth,
     }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
         addTravel: (travelRecord, uid) => dispatch(addTravel(travelRecord, uid))
     }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddTravel);

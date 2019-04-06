@@ -1,3 +1,4 @@
+import config from '../../components/auth/config/config'
 
 const initState = {
     newTravel:{
@@ -19,7 +20,7 @@ const initState = {
     lastDeletedTravel: null,
     travelListMapCenter: null,
     sourceDbServer: null,
-}
+};
 
 const travelReducer = (state = initState, action) => {
     switch (action.type) {
@@ -46,9 +47,7 @@ const travelReducer = (state = initState, action) => {
         }
         case 'DELETE_FOOTPRINT':{
             console.log('delete footprint', action.footprint);
-            const newFootprints = state.newTravel.footprints.filter(footprint1 => footprint1 !== action.footprint);
-            state.newTravel.footprints = newFootprints;
-            // console.log(state.newTravel.footprints);
+            state.newTravel.footprints = state.newTravel.footprints.filter(footprint1 => footprint1 !== action.footprint);
             return state;
         }
         case 'ADD_TRAVEL':{
@@ -58,7 +57,7 @@ const travelReducer = (state = initState, action) => {
                 city: {
                     name: null,
                     country: null,
-                    latlng:{
+                    latlng: {
                         lat: null,
                         lng: null
                     }
@@ -67,8 +66,7 @@ const travelReducer = (state = initState, action) => {
                 endDate: null,
                 rating: null,
                 footprints: []
-            }
-
+            };
             state.travelList.push(action.travel);
             state.lastAddedTravel = action.travel;
 
@@ -92,18 +90,45 @@ const travelReducer = (state = initState, action) => {
         }
         case 'CHANGE_SERVER':{
             const region = action.region;
-
-            if(region === 'Canada' || region === null || region === ''){
-                state.sourceDbServer = 'http://localhost:3001';
+            if(region === 'Asia'){
+                state.sourceDbServer = config.server_Asia;
             }else{
-                state.sourceDbServer = 'http://localhost:3002';
+                state.sourceDbServer = config.server_Canada;
             }
-            console.log("sourceDbServer: ", state.sourceDbServer);
+            console.log("source database server: ", state.sourceDbServer);
             return state;
         }
+        case 'LOGOUT_SUCCESS':
+            console.log('Logout success');
+            //state=initState does not work
+            state = {
+                newTravel:{
+                    city: {
+                        name: null,
+                        country: null,
+                        latlng: {
+                            lat: null,
+                            lng: null
+                        }
+                    },
+                    startDate: null,
+                    endDate: null,
+                    rating: null,
+                    footprints: [],
+                },
+                travelList: null,
+                lastAddedTravel: null,
+                lastDeletedTravel: null,
+                travelListMapCenter: null,
+                sourceDbServer: null,
+            };
+            return state;
+        case 'LOGOUT_ERROR':
+            console.log('Logout error');
+            return state;
         default:
             return state;
     }
-}
+};
 
 export default travelReducer

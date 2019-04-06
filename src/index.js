@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { reduxFirestore, getFirestore } from 'redux-firestore';
 import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
-import fbConfig from './components/config/fbConfig';
+import fbConfig from './components/auth/config/fbConfig';
 
 const store = createStore(rootReducer,
     compose(
@@ -24,5 +24,5 @@ store.firebaseAuthIsReady.then(() => {
         ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
         serviceWorker.unregister()
     }
-)
+);
 

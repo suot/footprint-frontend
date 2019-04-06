@@ -5,31 +5,31 @@ export const addCity = (city) => {
     return (dispatch) => {
         dispatch({ type: 'ADD_CITY', city });
     }
-}
+};
 
 export const addFootprint = (footprint) => {
     return (dispatch) => {
         dispatch({ type: 'ADD_FOOTPRINT', footprint });
     }
-}
+};
 
 export const deleteFootprint = (footprint) => {
     return (dispatch) => {
         dispatch({ type: 'DELETE_FOOTPRINT', footprint });
     }
-}
+};
 
 export const addTravelTime = (startDate, endDate) => {
     return (dispatch) => {
         dispatch({ type: 'ADD_TRAVEL_TIME', startDate, endDate });
     }
-}
+};
 
 export const addRating = (rating) => {
     return (dispatch) => {
         dispatch({ type: 'ADD_TRAVEL_RATING', rating });
     }
-}
+};
 
 
 export const addTravel = (travel, uid) => {
@@ -44,9 +44,9 @@ export const addTravel = (travel, uid) => {
             dispatch({ type: 'ADD_TRAVEL', travel });
         }).catch(function (error) { console.log(error); });
     }
-}
+};
 
-export const deleteTravel = (travelId, uid) => {
+export const deleteTravel = (travelId) => {
     return (dispatch, getState) => {
         let sourceDbServer = getState().travel.sourceDbServer;
 
@@ -55,7 +55,7 @@ export const deleteTravel = (travelId, uid) => {
             dispatch({ type: 'DELETE_TRAVEL', travel });
         }).catch(function (error) { console.log(error); });
     }
-}
+};
 
 export const getTravelList = (uid) => {
     return (dispatch, getState) => {
@@ -70,16 +70,27 @@ export const getTravelList = (uid) => {
                 console.log(error);
             });
     }
-}
+};
 
 export const changeMapCenter_TravelList = (latlng) => {
     return (dispatch) => {
         dispatch({ type: 'CHANGE_MAPCENTER_TRAVELLIST', latlng });
     }
-}
+};
 
 export const changeServer = (region) => {
     return (dispatch) => {
         dispatch({ type: 'CHANGE_SERVER', region });
     }
-}
+};
+
+export const signOut = () => {
+    return (dispatch, getState, {getFirebase}) => {
+        const firebase = getFirebase();
+        firebase.auth().signOut().then(() => {
+            dispatch({ type: 'LOGOUT_SUCCESS' })
+        }).catch((err) => {
+            dispatch({ type: 'LOGOUT_ERROR', err })
+        });
+    }
+};

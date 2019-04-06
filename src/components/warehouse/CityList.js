@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Button, Card, CardBody, CardFooter, CardHeader, Col, FormGroup, Form, Input, Label, Row, InputGroup } from 'reactstrap';
+import { Button, Card, CardBody, CardHeader, Col, FormGroup, Form, Input, Row } from 'reactstrap';
 import { connect } from 'react-redux'
 import { getCityList } from '../../store/actions/warehouseActions'
-import Map_CityList from '../utils/Map_CityList';
-import TravelTimeline_CityList from "../utils/TravelTimeline_CityList";
+import MapCityList from '../utils/map/Map_CityList';
+import TravelTimelineCityList from "../utils/timeline/TravelTimeline_CityList";
 
 
 class CityList extends Component {
@@ -25,13 +25,12 @@ class CityList extends Component {
             [e.target.id]: e.target.value
         });
 
-    }
+    };
 
 
     getCityList = () => {
         this.props.getCityList(this.state);
-    }
-
+    };
 
     render() {
         if(this.props.cityList===null) {
@@ -42,55 +41,45 @@ class CityList extends Component {
                             <Col xs="12" md="12">
                                 <Card>
                                     <CardHeader>
-                                        <i className="icon-badge"></i><strong>List the top cities to your favor</strong>
-                                    </CardHeader>
-                                    <CardBody>
                                         <Row>
+                                            <Col xs="1" md="1" className="mt-2">List the top</Col>
+                                            <Col xs="1" md="1">
+                                                <Input type="select" id="number" onChange={this.updateInput}>
+                                                    <option value="" />
+                                                    <option value="3">3</option>
+                                                    <option value="5">5</option>
+                                                    <option value="10">10</option>
+                                                </Input>
+                                            </Col>
                                             <Col xs="2" md="2">
-                                                <FormGroup row className="ml-1">
-                                                    <Label htmlFor="number">Number</Label>
-                                                    <Input type="select" id="number" onChange={this.updateInput}>
-                                                        <option value=""></option>
-                                                        <option value="3">3</option>
-                                                        <option value="5">5</option>
-                                                        <option value="10">10</option>
-                                                    </Input>
-                                                </FormGroup>
-
-                                                <FormGroup row className="ml-1">
-                                                    <Label htmlFor="type">Type</Label>
-                                                    <Input type="select" id="type" onChange={this.updateInput}>
-                                                        <option value=""></option>
-                                                        <option value="metropolis">Metropolis</option>
-                                                        <option value="sea">Coastal city</option>
-                                                        <option value="mountain">Mountainous city</option>
-                                                        <option value="history">Historic city</option>
-                                                    </Input>
-                                                </FormGroup>
-
-                                                <FormGroup row className="ml-1">
-                                                    <Label htmlFor="time">Time</Label>
-                                                    <Input type="select" id="time" onChange={this.updateInput}>
-                                                        <option value=""></option>
-                                                        <option value="2018">2018</option>
-                                                        <option value="2019">2019</option>
-                                                    </Input>
-                                                </FormGroup>
-
-                                                <FormGroup row className="ml-1">
-                                                    <Label htmlFor="pattern">Ranking by</Label>
-                                                    <Input type="select" id="pattern" onChange={this.updateInput}>
-                                                        <option value=""></option>
-                                                        <option value="ratings">Average ratings</option>
-                                                        <option value="times">Visited times</option>
-                                                    </Input>
-                                                </FormGroup>
+                                                <Input type="select" id="type" onChange={this.updateInput}>
+                                                    <option value="" />
+                                                    <option value="metropolis">Metropolises</option>
+                                                    <option value="sea">Coastal cities</option>
+                                                    <option value="mountain">Mountainous cities</option>
+                                                    <option value="history">Historic cities</option>
+                                                </Input>
+                                            </Col>
+                                            <Col xs="2" md="2">
+                                                <Input type="select" id="time" onChange={this.updateInput}>
+                                                    <option value="" />
+                                                    <option value="2018">in 2018</option>
+                                                    <option value="2019">in 2019</option>
+                                                </Input>
+                                            </Col>
+                                            <Col xs="1" md="1" className="mt-2">ranking by</Col>
+                                            <Col xs="2" md="2">
+                                                <Input type="select" id="pattern" onChange={this.updateInput}>
+                                                    <option value=""/>
+                                                    <option value="ratings">average rating</option>
+                                                    <option value="times">visited times</option>
+                                                </Input>
+                                            </Col>
+                                            <Col xs="2" md="2">
+                                                <Button type="button" color="primary" className="mr-2" onClick={this.getCityList}><i className="fa fa-dot-circle-o"/> Query</Button>
                                             </Col>
                                         </Row>
-                                    </CardBody>
-                                    <CardFooter>
-                                        <Button type="button" color="primary" className="mr-2" onClick={this.getCityList}><i className="fa fa-dot-circle-o"></i> Query</Button>
-                                    </CardFooter>
+                                    </CardHeader>
                                 </Card>
                             </Col>
                         </Row>
@@ -105,63 +94,57 @@ class CityList extends Component {
                             <Col xs="12" md="12">
                                 <Card>
                                     <CardHeader>
-                                        <i className="icon-badge"></i><strong>List the top cities to your favor</strong>
+                                        <Row>
+                                            <Col xs="1" md="1" className="mt-2">List the top</Col>
+                                            <Col xs="1" md="1">
+                                                <Input type="select" id="number" onChange={this.updateInput}>
+                                                    <option value=""/>
+                                                    <option value="3">3</option>
+                                                    <option value="5">5</option>
+                                                    <option value="10">10</option>
+                                                </Input>
+                                            </Col>
+                                            <Col xs="2" md="2">
+                                                <Input type="select" id="type" onChange={this.updateInput}>
+                                                    <option value=""/>
+                                                    <option value="metropolis">Metropolises</option>
+                                                    <option value="sea">Coastal cities</option>
+                                                    <option value="mountain">Mountainous cities</option>
+                                                    <option value="history">Historic cities</option>
+                                                </Input>
+                                            </Col>
+                                            <Col xs="2" md="2">
+                                                <Input type="select" id="time" onChange={this.updateInput}>
+                                                    <option value=""/>
+                                                    <option value="2018">in 2018</option>
+                                                    <option value="2019">in 2019</option>
+                                                </Input>
+                                            </Col>
+                                            <Col xs="1" md="1" className="mt-2">ranking by</Col>
+                                            <Col xs="2" md="2">
+                                                <Input type="select" id="pattern" onChange={this.updateInput}>
+                                                    <option value=""/>
+                                                    <option value="ratings">average rating</option>
+                                                    <option value="times">visited times</option>
+                                                </Input>
+                                            </Col>
+                                            <Col xs="2" md="2">
+                                                <Button type="button" color="primary" className="mr-2" onClick={this.getCityList}><i className="fa fa-dot-circle-o"/> Query</Button>
+                                            </Col>
+                                        </Row>
                                     </CardHeader>
                                     <CardBody>
                                         <Row>
-                                            <Col xs="2" md="2">
-                                                <FormGroup row className="ml-1">
-                                                    <Label htmlFor="number">Number</Label>
-                                                    <Input type="select" id="number" onChange={this.updateInput}>
-                                                        <option value=""></option>
-                                                        <option value="3">3</option>
-                                                        <option value="5">5</option>
-                                                        <option value="10">10</option>
-                                                    </Input>
-                                                </FormGroup>
-
-                                                <FormGroup row className="ml-1">
-                                                    <Label htmlFor="type">Type</Label>
-                                                    <Input type="select" id="type" onChange={this.updateInput}>
-                                                        <option value=""></option>
-                                                        <option value="metropolis">Metropolis</option>
-                                                        <option value="sea">Coastal city</option>
-                                                        <option value="mountain">Mountainous city</option>
-                                                        <option value="history">Historic city</option>
-                                                    </Input>
-                                                </FormGroup>
-
-                                                <FormGroup row className="ml-1">
-                                                    <Label htmlFor="time">Time</Label>
-                                                    <Input type="select" id="time" onChange={this.updateInput}>
-                                                        <option value=""></option>
-                                                        <option value="2018">2018</option>
-                                                        <option value="2019">2019</option>
-                                                    </Input>
-                                                </FormGroup>
-
-                                                <FormGroup row className="ml-1">
-                                                    <Label htmlFor="pattern">Ranking by</Label>
-                                                    <Input type="select" id="pattern" onChange={this.updateInput}>
-                                                        <option value=""></option>
-                                                        <option value="ratings">Average ratings</option>
-                                                        <option value="times">Visited times</option>
-                                                    </Input>
-                                                </FormGroup>
-                                            </Col>
                                             <Col xs="3" md="3">
                                                 <FormGroup row className="ml-1">
-                                                    <TravelTimeline_CityList />
+                                                    <TravelTimelineCityList />
                                                 </FormGroup>
                                             </Col>
-                                            <Col xs="7" md="7">
-                                                <Map_CityList/>
+                                            <Col xs="9" md="9">
+                                                <MapCityList/>
                                             </Col>
                                         </Row>
                                     </CardBody>
-                                    <CardFooter>
-                                        <Button type="button" color="primary" className="mr-2" onClick={this.getCityList}><i className="fa fa-dot-circle-o"></i> Query</Button>
-                                    </CardFooter>
                                 </Card>
                             </Col>
                         </Row>
@@ -177,12 +160,12 @@ const mapStateToProps = (state) => {
     return {
         cityList: state.warehouse.cityList,
     }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
         getCityList: (query) => dispatch(getCityList(query))
     }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CityList);

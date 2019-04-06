@@ -1,18 +1,18 @@
 import React, { Component, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import {Button, Card, CardBody, CardFooter, CardHeader, Col, Container, FormGroup, Input, Label, Row} from 'reactstrap';
-import navigation from '../../_nav';  // sidebar nav config
-import routes from '../../routes';  // routes config
+import { Container} from 'reactstrap';
+import {navigation, navigation_admin} from '../../_nav';  // sidebar nav config
+import {routes} from '../../routes';  // routes config
 import {AppFooter, AppHeader, AppSidebar, AppSidebarFooter, AppSidebarForm, AppSidebarHeader, AppSidebarMinimizer, AppSidebarNav} from '@coreui/react';
 import {connect} from "react-redux";
 import {changeServer} from "../../store/actions/travelActions";
-
+import config from '../auth/config/config'
 
 const DefaultFooter = React.lazy(() => import('./DefaultFooter'));
 const DefaultHeader = React.lazy(() => import('./DefaultHeader'));
 
 class DefaultLayout extends Component {
-    loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
+    loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>;
 
     signOut(e) {
         e.preventDefault()
@@ -33,6 +33,8 @@ class DefaultLayout extends Component {
     }
 
     render() {
+        const nav = (this.props.auth.uid === config.admin) ? navigation_admin : navigation;
+
         if(this.props.profile.isEmpty) {
             return (
                 <div className="animated fadeIn pt-1 text-center">Loading profile...</div>
@@ -50,7 +52,7 @@ class DefaultLayout extends Component {
                             <AppSidebarHeader />
                             <AppSidebarForm />
                             <Suspense>
-                                <AppSidebarNav navConfig={navigation} {...this.props}/>
+                                <AppSidebarNav navConfig={nav} {...this.props}/>
                             </Suspense>
                             <AppSidebarFooter />
                             <AppSidebarMinimizer />
@@ -95,12 +97,12 @@ const mapStateToProps = (state) => {
     auth: state.firebase.auth,
     profile: state.firebase.profile
   }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
     changeServer: (region) => dispatch(changeServer(region))
   }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(DefaultLayout);

@@ -1,6 +1,5 @@
 import React from 'react';
 
-const Dashboard = React.lazy(() => import('./components/dashboard/Dashboard'));
 const Profile = React.lazy(() => import('./components/users/Profile'));
 const AddTravel = React.lazy(() => import('./components/travel/AddTravel'));
 const TravelList = React.lazy(() => import('./components/travel/TravelList'));
@@ -9,7 +8,7 @@ const CityList = React.lazy(() => import('./components/warehouse/CityList'));
 const Notfound = React.lazy(() => import('./components/auth/Notfound'));
 
 
-const routes = [
+export const routes = [
   { path: '/', exact: true, name: 'Home', component: AddTravel },
   { path: '/profile', name: 'Profile', component: Profile },
   { path: '/travel/add', name: 'AddTravel', component: AddTravel },
@@ -19,4 +18,3 @@ const routes = [
   { name: 'NotFound', component: Notfound },
 ];
 
-export default routes;

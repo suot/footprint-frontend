@@ -4,7 +4,7 @@ import 'firebase/auth'
 
 
 // Initialize Firebase
-var config = {
+let config = {
     apiKey: "AIzaSyAMqGy3D4aygkACM_IgmyzEh69Q7Xn5ZO8",
     authDomain: "footprint-c5a39.firebaseapp.com",
     databaseURL: "https://footprint-c5a39.firebaseio.com",

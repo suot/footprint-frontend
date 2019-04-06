@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Button, Card, CardBody, CardFooter, CardHeader, Col, FormGroup, Form, Input, Label, Row, InputGroup } from 'reactstrap';
+import { Card, CardBody, CardHeader, Col, FormGroup, Form, Row } from 'reactstrap';
 import { connect } from 'react-redux'
 import { getTravelList } from '../../store/actions/travelActions'
-import Map_TravelList from '../utils/Map_TravelList';
-import TravelTimeline from '../utils/TravelTimeline'
+import MapTravelList from '../utils/map/Map_TravelList';
+import TravelTimeline from '../utils/timeline/TravelTimeline_TravelList'
 
 
 class TravelList extends Component {
@@ -21,12 +21,10 @@ class TravelList extends Component {
 
     render() {
         if(this.props.travelList===null) {
-            console.log("render travelList: null");
             return (
                 <div className="animated fadeIn pt-1 text-center">Loading the travel list...</div>
             );
         }else {
-            console.log("render travelList of length: ", this.props.travelList.length );
             return (
                 <div className="animated fadeIn mt-3">
                     <Form>
@@ -34,7 +32,7 @@ class TravelList extends Component {
                             <Col xs="12" md="12">
                                 <Card>
                                     <CardHeader>
-                                        <i className="icon-map"></i><strong>Your travel records and footprints</strong>
+                                        <i className="icon-map"/><strong>Your travel records and footprints</strong>
                                     </CardHeader>
                                     <CardBody>
                                         <Row>
@@ -44,7 +42,7 @@ class TravelList extends Component {
                                                 </FormGroup>
                                             </Col>
                                             <Col xs="9" md="9">
-                                                <Map_TravelList/>
+                                                <MapTravelList/>
                                             </Col>
                                         </Row>
                                     </CardBody>
@@ -64,12 +62,12 @@ const mapStateToProps = (state) => {
         auth: state.firebase.auth,
         travelList: state.travel.travelList,
     }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
         getTravelList: uid => dispatch(getTravelList(uid))
     }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(TravelList);

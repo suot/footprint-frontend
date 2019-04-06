@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {addFootprint, deleteFootprint} from "../../store/actions/travelActions";
+import {addFootprint, deleteFootprint} from "../../../store/actions/travelActions";
 import styled from 'styled-components';
 
 import L from 'leaflet';
@@ -19,16 +19,19 @@ let map_AddTravel;
 class Map_AddTravel extends React.Component {
 
     componentDidUpdate(prevProps) {
-        if (this.props.latlng !== prevProps.latlng) {
-            map_AddTravel.panTo(this.props.latlng);
-        }
+        //if(this.props.newTravel && this.props.newTravel.city){
+            if (this.props.newCity.latlng !== prevProps.newCity.latlng) {
+                map_AddTravel.flyTo(this.props.newCity.latlng, 10, {animate: true, duration: 5.0});
+            }
+        //}
     }
 
     componentDidMount(){
-        const {latlng, addFootprint, deleteFootprint} = this.props;
+        const {addFootprint, deleteFootprint} = this.props;
         map_AddTravel = L.map('map1', {
-            center: [latlng.lat, latlng.lng],
-            zoom: 10
+            //center: [latlng.lat, latlng.lng],
+            center: [18, 16],
+            zoom: 2
         });
 
         //OpenStreetMap tileLayer
@@ -81,15 +84,16 @@ class Map_AddTravel extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        latlng: ((state.travel.newTravel.city.latlng.lat === null || state.travel.newTravel.city.latlng.lng === null)? {lat: 39.9, lng: 116.4} : state.travel.newTravel.city.latlng),
+        //latlng: ((state.travel.newTravel.city.latlng.lat === null || state.travel.newTravel.city.latlng.lng === null)? {lat: 18, lng: 16} : state.travel.newTravel.city.latlng),
+        newCity: state.travel.newTravel.city
     }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
         addFootprint: (newFootprint) => dispatch(addFootprint(newFootprint)),
         deleteFootprint: (footprint) => dispatch(deleteFootprint(footprint))
     }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Map_AddTravel);
