@@ -76,6 +76,17 @@ const warehouseReducer = (state = initState, action) => {
             state.cityListMapCenter = action.latlng;
             return state;
         }
+        case 'CLEAN_UP_WAREHOUSE_REDUCER_STATE':{
+            state = {
+                completion_sdb_add: true,
+                completion_sdb_delete: true,
+                completion_warehouse_add: true,
+                completion_warehouse_delete: true,
+                cityList: null,
+                cityListMapCenter: null,
+            };
+            return state;
+        }
         default:
             return state;
     }

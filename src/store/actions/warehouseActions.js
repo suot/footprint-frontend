@@ -71,12 +71,12 @@ export const deleteDataFromWarehouse = () => {
 
 export const getCityList = (query) => {
     return (dispatch) => {
-
         let request_warehouse = config.server_Warehouse + '/warehouse/cityList';
         axios.post(request_warehouse, query).then(cityList => {
-            console.log(cityList);
-            dispatch({ type: 'GET_CITY_LIST' , cityList});
-        }).catch(function (error) { console.log(error); });
+            dispatch({type: 'GET_CITY_LIST', cityList});
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 };
 

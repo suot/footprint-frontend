@@ -89,6 +89,7 @@ export const signOut = () => {
         const firebase = getFirebase();
         firebase.auth().signOut().then(() => {
             dispatch({ type: 'LOGOUT_SUCCESS' })
+            dispatch({ type: 'CLEAN_UP_WAREHOUSE_REDUCER_STATE' })
         }).catch((err) => {
             dispatch({ type: 'LOGOUT_ERROR', err })
         });

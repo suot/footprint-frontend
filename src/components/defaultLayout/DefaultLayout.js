@@ -1,23 +1,27 @@
 import React, { Component, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Container} from 'reactstrap';
+import {Container} from 'reactstrap';
 import {navigation, navigation_admin} from '../../_nav';  // sidebar nav config
 import {routes} from '../../routes';  // routes config
-import {AppFooter, AppHeader, AppSidebar, AppSidebarFooter, AppSidebarForm, AppSidebarHeader, AppSidebarMinimizer, AppSidebarNav} from '@coreui/react';
+import {
+    AppFooter,
+    AppHeader,
+    AppSidebar,
+    AppSidebarFooter,
+    AppSidebarForm,
+    AppSidebarHeader,
+    AppSidebarMinimizer,
+    AppSidebarNav
+} from '@coreui/react';
 import {connect} from "react-redux";
-import {changeServer} from "../../store/actions/travelActions";
-import config from '../auth/config/config'
+import {changeServer, signOut} from "../../store/actions/travelActions";
+import config from '../auth/config/config';
 
 const DefaultFooter = React.lazy(() => import('./DefaultFooter'));
 const DefaultHeader = React.lazy(() => import('./DefaultHeader'));
 
 class DefaultLayout extends Component {
     loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>;
-
-    signOut(e) {
-        e.preventDefault()
-        // this.props.history.push('/login')
-    }
 
     //state.firebase.auth is loaded when redirecting to this page, while state.firebase.profile needs seconds to be synchronized from firebase DB.
     //When it is loaded the props will change and then set the state to render the component again.
@@ -34,7 +38,6 @@ class DefaultLayout extends Component {
 
     render() {
         const nav = (this.props.auth.uid === config.admin) ? navigation_admin : navigation;
-
         if(this.props.profile.isEmpty) {
             return (
                 <div className="animated fadeIn pt-1 text-center">Loading profile...</div>
@@ -44,7 +47,7 @@ class DefaultLayout extends Component {
                 <div className="app">
                     <AppHeader fixed>
                         <Suspense fallback={this.loading()}>
-                            <DefaultHeader onLogout={e=>this.signOut(e)}/>
+                            <DefaultHeader />
                         </Suspense>
                     </AppHeader>
                     <div className="app-body">
@@ -101,7 +104,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeServer: (region) => dispatch(changeServer(region))
+    changeServer: (region) => dispatch(changeServer(region)),
+    logout: () => dispatch(signOut())
   }
 };
 
