@@ -1,5 +1,7 @@
 ## Demo
-<iframe width="560" height="315" src="https://www.youtube.com/embed/LRgtvDJ4w1E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div align="center">
+  <a href="https://youtu.be/LRgtvDJ4w1E"><img src="https://youtu.be/LRgtvDJ4w1E/0.jpg" alt="Demo in Youtube"></a>
+</div>
 
 ## Architecture
 <img src="readmeImages/1.png">
