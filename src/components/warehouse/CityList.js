@@ -24,7 +24,6 @@ class CityList extends Component {
             ...this.state,
             [e.target.id]: e.target.value
         });
-
     };
 
 
