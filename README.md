@@ -1,8 +1,5 @@
 ## Demo
-<div align="center">
-  <a href="https://youtu.be/LRgtvDJ4w1E"><img src="https://youtu.be/LRgtvDJ4w1E/0.jpg" alt="Demo in Youtube"></a>
-</div>
-
+[![Click to play on Youtube](https://img.youtube.com/vi/LRgtvDJ4w1E/0.jpg)](https://www.youtube.com/watch?v=LRgtvDJ4w1E)
 ## Architecture
 <img src="readmeImages/1.png">
 
