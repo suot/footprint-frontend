@@ -23,8 +23,8 @@ Step 1: register, login, and edit your profile (avatar, region...) by clicking t
 
 <img src="readmeImages/5.png">
 All users’ profile info will be stored into Google Firebase database server. In addition, firebase also conducts authentication and validation.
-<img src="readmeImages/6.png">
-<img src="readmeImages/7.png">
+<img src="readmeImages/6_1.png">
+<img src="readmeImages/6_2.png">
 
 Step 2: Record a travel and mark your footprints there. The travel time is a “react-daterange-picker” component and the map is an OpenStreetMap tile layer operated by Leaflet APIs. City is a “react-autosuggest” component with a cities.json dataset. Click on one city label to let the map pan to it. You may also want to input the cost of that travel, select the type of the city, and rate it.
 
