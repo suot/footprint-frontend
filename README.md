@@ -1,15 +1,26 @@
-## Demo on Youtube
-Click on the image to play the demo on Youtube
+## Introduction
+This is a travel application and it helps you:
+1. record your travel history including the cities and the tourist attractions that you have visited.
+2. rate cities to give a reference to other users.
+3. view the list of most popular cities according to your preference.
+
+## Demo
+Click on the thumbnail to play the demo on Youtube
 
 [![Click to play on Youtube](https://img.youtube.com/vi/LRgtvDJ4w1E/0.jpg)](https://www.youtube.com/watch?v=LRgtvDJ4w1E)
 
 ## Architecture
+Actually, it is a data warehouse project, developed mainly by using:
+1. React, Redux, Leaflet, and OpenStreet/Google Maps tileLayers in the frontend side.
+2. NodeJS, Express, Mongoose, Google Firebase DB and Authentication, MongoDB atlas, and Redis in the backend side.
+ 
 <img src="readmeImages/1.png">
 
 ## User manual
 Step 1: register, login, and edit your profile (avatar, region...) by clicking the default avatar. If you select Asia as your region, all your requests will be sent to the Asian backend server and all your application data will be stored into the footprint_Asia mongo db. Save avatar, submit updates, and you will be directed to the default page: “Mark your footprints”. You can see only two menu tabs on the side bar as you are not the administrator, and you can see your updated avatar.
 <img src="readmeImages/2.png" width="300"> <img src="readmeImages/3.png" width="300" height="190">
 <img src="readmeImages/4.png">
+
 <img src="readmeImages/5.png">
 All users’ profile info will be stored into Google Firebase database server. In addition, firebase also conducts authentication and validation.
 <img src="readmeImages/6.png">
@@ -52,7 +63,7 @@ Change the query string to get specified lists. The search will first be execute
 <img src="readmeImages/28.png">
 <img src="readmeImages/29.png">
 
-## Deploy the application
+## Run the application locally
 Step 1: Clone the frontend source code: https://github.com/hongshuidang/footprint_frontend.git to a local repository, and run “npm start” to open the frontend app at http://localhost:3000
 
 Step 2: Clone the backend source code from https://github.com/hongshuidang/footprint_backend.git, and then execute “npm start” to run the backend server 1(assume it is the Canadian server) at port 3001.
