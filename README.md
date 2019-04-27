@@ -63,11 +63,49 @@ Change the query string to get specified lists. The search will first be execute
 <img src="readmeImages/28.png">
 <img src="readmeImages/29.png">
 
-## Run the application locally
-Step 1: Clone the frontend source code: https://github.com/hongshuidang/footprint_frontend.git to a local repository, and run “npm start” to open the frontend app at http://localhost:3000
+## Deploy the application servers locally
+1: Frontend server: clone source code to a local repository, install modules, and launch the frontend server in browser at "http://localhost:3000" by default
+```
+Git clone https://github.com/hongshuidang/footprint_frontend.git
+```
+```
+npm install
+```
+```
+npm start
+```
+or
+```
+npm run build
+```
+```
+npm install -g serve
+```
+```
+serve -s build
+```
+2: Backend server 1: backend_Canada. By default it will be launched at port 3001
+```
+https://github.com/hongshuidang/footprint_backend.git
+```
+```
+npm install
+```
+```
+npm start
+```
+3: Backend server 2: backend_Asia. Copy the backend source code to another folder, rename it, and change the port in the “index.js” file to 3002.
+```
+npm start
+```
 
-Step 2: Clone the backend source code from https://github.com/hongshuidang/footprint_backend.git, and then execute “npm start” to run the backend server 1(assume it is the Canadian server) at port 3001.
-
-Step 3: Copy the backend source code to another folder, rename it, change the port in the “index.js” file to 3002, and execute “npm start” to run the backend server 2, assuming the Asian server.
-
-Step 4: Clone the warehouse source code from https://github.com/hongshuidang/footprint_backend_warehouse.git and run “npm start” to launch the warehouse server at port 3004.
+4: Warehouse server. By default it will be launched at port 3004
+```
+https://github.com/hongshuidang/footprint_backend_warehouse.git
+```
+```
+npm install
+```
+```
+npm start
+```
