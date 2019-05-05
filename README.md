@@ -66,7 +66,7 @@ Change the query string to get specified lists. The search will first be execute
 ## Deploy the application servers locally
 1: Frontend server: clone source code to a local repository, install modules, and launch the frontend server in browser at "http://localhost:3000" by default
 ```
-Git clone https://github.com/hongshuidang/footprint_frontend.git
+Git clone https://github.com/hongshuidang/footprint-frontend.git
 ```
 ```
 npm install
@@ -86,7 +86,7 @@ serve -s build
 ```
 2: Backend server 1: backend_Canada. By default it will be launched at port 3001
 ```
-https://github.com/hongshuidang/footprint_backend.git
+https://github.com/hongshuidang/footprint-backend.git
 ```
 ```
 npm install
@@ -101,7 +101,7 @@ npm start
 
 4: Warehouse server. By default it will be launched at port 3004
 ```
-https://github.com/hongshuidang/footprint_backend_warehouse.git
+https://github.com/hongshuidang/footprint-warehouse.git
 ```
 ```
 npm install
