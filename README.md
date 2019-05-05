@@ -29,20 +29,29 @@ All users’ profile info will be stored into Google Firebase database server. I
 Step 2: Record a travel and mark your footprints there. The travel time is a “react-daterange-picker” component and the map is an OpenStreetMap tile layer operated by Leaflet APIs. City is a “react-autosuggest” component with a cities.json dataset. Click on one city label to let the map pan to it. You may also want to input the cost of that travel, select the type of the city, and rate it.
 
 <img src="readmeImages/8.png" width="300"> <img src="readmeImages/9.png" width="300">
-<img src="readmeImages/10.png">
+<img src="readmeImages/10.png" width="80%" height="80%">
+
 Zoom in/out the map or use the geocoder search tool at the top right to find detailed venues that you have visited. Mark them on the map as your footprints or unmark them by clicking on the marker.
-<img src="readmeImages/11.png">
+
+<img src="readmeImages/11.png" width="80%" height="80%">
 
 Step 3: Click on the “Add the record” button, the page redirects to the “List your footprints” page, showing your previous travel records and footprints in map clusters. You can add more cities. Clicking one cluster on the map shows all the footprint markers or maybe some sub-clusters.
-<img src="readmeImages/12.png">
+
+<img src="readmeImages/12.png" width="80%" height="80%">
+
 Click on the center of a calendar center in the timeline component, that pertinent city (New York) will be zoomed in. Click on another calendar, the map will trigger an animation flying to that city (Toronto)
-<img src="readmeImages/13.png">
-<img src="readmeImages/14.png">
+
+<img src="readmeImages/13.png" width="80%" height="80%">
+<img src="readmeImages/14.png" width="80%" height="80%">
+
 Click on the delete link, the city disappears from the timeline list, the cluster and footprint markers disappear from the map, and the data is deleted from the database.
-<img src="readmeImages/15.png">
+
+<img src="readmeImages/15.png" width="80%" height="80%">
+
 Now that we had added two cities Toronto and New York, and later deleted New York, we should have one record (Toronto) left in the database. travels.city is the foreign key referring to the city entity.
-<img src="readmeImages/16.png">
-<img src="readmeImages/17.png">
+
+<img src="readmeImages/16.png" width="80%" height="80%">
+<img src="readmeImages/17.png" width="80%" height="80%">
 
 Step 4: log in with an administrative account, then you can see a “Warehouse” tab on the side bar. Let’s first fill 100 sample travel records into source db1 footprint_Canada and then synchronize them together with the one record in db2 footprint_Asia to the warehouse.
 <img src="readmeImages/18.png">
